@@ -9,9 +9,11 @@
 *:hover,
 *:focus,
 *:active,
-*:focus-visible {
+*:focus-visible,
+*:checked {
     border: none;
     background-color: transparent;
+    background: transparent;
 }
 
 :root {
@@ -28,6 +30,13 @@
     text-align: start;
     border: none;
 }
+.btn-secondary {
+    --bs-btn-active-bg: transparent;
+    --bs-btn-active-color: var(--g);
+}
+.dropdown-item:hover {
+    background-color: transparent;
+}
 
 .dropdown-toggle::after {
     display: none;
@@ -42,7 +51,7 @@
 .dropdown-menu {
     border-color: transparent;
 }
-main {
+#home-main {
     height: 100vh;
     width: 100vw;
     max-height: 100vh;
@@ -75,6 +84,9 @@ main {
     object-fit: cover;
     pointer-events: none;
 }
-.col-3 {
+#home-scrl .col-3 {
     width: 30%;
+}
+.selected {
+    font-weight: bold;
 }
