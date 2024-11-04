@@ -18,7 +18,7 @@
     --g: #202020;
 }
 
-header {
+#header {
     margin: 1rem;
 }
 
@@ -38,4 +38,43 @@ header {
 .btn:focus-visible {
     background-color: transparent;
     color: var(--g);
+}
+.dropdown-menu {
+    border-color: transparent;
+}
+main {
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+#main-container {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+}
+#home-crsl {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    align-items: center;
+    cursor: grab;
+    user-select: none;
+}
+#home-crsl img {
+    width: 85%;
+    object-fit: cover;
+    pointer-events: none;
+}
+.col-3 {
+    width: 30%;
 }
