@@ -282,17 +282,32 @@
     cursor: pointer;
 }
 
+/* Ajuste en #product-info para empezar fuera de pantalla */
 #product-info {
+    position: fixed;
+    top: 100vh; /* Oculto fuera de la pantalla, abajo */
+    left: 0;
     width: 100vw;
     height: 40vh;
-    display: none;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     background-color: #d4d4d4;
     color: var(--g);
     justify-content: space-between;
     padding: 10px;
+    overflow-y: auto;
 }
+
+#product-box, #gallery-main, #header, #product-info {
+    transition: top 0.5s ease;
+}
+
+/* Estilos cuando #product-info está visible */
+#product-info.visible {
+    top: 60vh; /* Se desliza hacia arriba */
+}
+
 
 #product-info div {
     height: 50%;
