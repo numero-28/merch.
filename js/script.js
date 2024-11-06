@@ -363,12 +363,12 @@ $(document).ready(function () {
             $("#product-box").css("top", "14%");      // 54% - 40% (altura de #product-info)
             $("#gallery-main").css("top", "-31%");    // 9% - 40%
             $("#header").css("top", "-40%");          // 0 - 40%
-            $("#product-bt-info div").text("- info");      // Cambiar el texto a "-"
+            $("#product-bt-info div:first-child").text("- info");      // Cambiar el texto a "-"
         } else {
             $("#product-box").css("top", "54%");      // Posición original
             $("#gallery-main").css("top", "9%");      // Posición original
             $("#header").css("top", "0");             // Posición original
-            $("#product-bt-info div").text("+ info");      // Cambiar el texto a "+"
+            $("#product-bt-info div:first-child").text("+ info");      // Cambiar el texto a "+"
         }
     });   
 
