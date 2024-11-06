@@ -200,6 +200,75 @@ $(document).ready(function () {
     });
 
     
+    $(document).ready(function(){
+        // Seleccionar todas las imágenes dentro de #gallery-main
+        $("#gallery-main img").click(function(){
+            var imagenSrc = $(this).attr("src");
+    
+            // Obtener todas las imágenes dentro de #gallery-main
+            var relatedImages = $("#gallery-main img").map(function(){
+                return $(this).attr("src");
+            }).get();
+    
+            // Determinar el índice de la imagen actual
+            var carouselIndex = relatedImages.indexOf(imagenSrc);
+    
+            // Crear el HTML del carrusel
+            var carouselHtml = `
+                <div id='carousel'>
+                    <img class='carousel-image' src='${imagenSrc}' />
+                    <div class='carousel-arrow carousel-arrow-left'>[←]</div>
+                    <div class='carousel-arrow carousel-arrow-right'>[→]</div>
+                </div>
+            `;
+            
+            // Añadir el carrusel al cuerpo del documento
+            $("body").append(`
+                <div id='imagenGrandeDiv' style='position:fixed;top:0;left:0;height:100%;width:100%;background:rgba(10,10,10,0.9);display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:10'>
+                    ${carouselHtml}
+                </div>
+            `);
+            
+            // Funcionalidad de los botones de flecha
+            $('.carousel-arrow-right, .carousel-arrow-left').click(function(event) {
+                event.stopPropagation();
+                if ($(this).hasClass('carousel-arrow-right')) {
+                    carouselIndex = (carouselIndex + 1) % relatedImages.length;
+                } else {
+                    carouselIndex = (carouselIndex - 1 + relatedImages.length) % relatedImages.length;
+                }
+                $('.carousel-image').attr('src', relatedImages[carouselIndex]);
+            });
+        
+            // Funcionalidad de las teclas del teclado
+            $(document).keydown(function(event) {
+                if ($('#imagenGrandeDiv').length) {
+                    switch (event.which) {
+                        case 37: // Tecla de flecha izquierda
+                            carouselIndex = (carouselIndex - 1 + relatedImages.length) % relatedImages.length;
+                            break;
+                        case 39: // Tecla de flecha derecha
+                            carouselIndex = (carouselIndex + 1) % relatedImages.length;
+                            break;
+                        case 27: // Esc para cerrar
+                            $('#imagenGrandeDiv').remove();
+                            return;
+                    }
+                    $('.carousel-image').attr('src', relatedImages[carouselIndex]);
+                }
+            });
+            
+            // Cerrar el carrusel al hacer clic fuera del carrusel
+            $("#imagenGrandeDiv").click(function(){
+                $('#imagenGrandeDiv').remove();
+            });
+        
+            // Evitar que los clics en las flechas cierren el carrusel
+            $(".carousel-arrow").click(function(event){
+                event.stopPropagation();
+            });
+        });
+    });
     
 
 
