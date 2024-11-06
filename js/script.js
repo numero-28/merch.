@@ -1,5 +1,6 @@
 $(document).ready(function () {
     
+    // arrays de artistas y de categorias
     const artists = {
         depresionsonora: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp',
@@ -37,9 +38,37 @@ $(document).ready(function () {
         ]
     };
     
+
+    // CARRUSEL DE IMÁGENES HOME
     let selectedArtist = null;
     let selectedCateg = null;
 
+    // para que recoja el input de a qué le das y lo ponga en negrita
+    $('.dropdown-item[data-artist]').click(function() {
+        event.preventDefault();
+        event.stopPropagation();
+
+        selectedArtist = $(this).data('artist');
+
+        $('.dropdown-item[data-artist]').removeClass('selected');
+        $(this).addClass('selected');
+
+        updateCarousel();
+    });
+
+    $('.dropdown-item[data-categ]').click(function() {
+        event.preventDefault();
+        event.stopPropagation();
+
+        selectedCateg = $(this).data('categ');
+
+        $('.dropdown-item[data-categ]').removeClass('selected');
+        $(this).addClass('selected');
+
+        updateCarousel();
+    });
+
+    // aquí básicamente ve qué tiene que devolverte dependiendo del input
     function updateCarousel() {
         $('#home-crsl').empty();
 
@@ -69,6 +98,7 @@ $(document).ready(function () {
             }
         }
 
+        // y aquí te crea tantas imagenes como elementos tenga que mostrar dependiendo de los inputs
         imagesToShow.forEach(function (imageSrc) {
             const imageDiv = $('<div class="col-3"></div>');
             const imageElement = $('<img>', {
@@ -83,54 +113,57 @@ $(document).ready(function () {
         updateItemsDropdown();
     }
 
+    // el dropdown de items solo se muestra cuando has seleccionado artista y categoria (que no sea 'todos')
+    // coge la url de las imagenes que se estan mostrando y muestra los nombres sin el webp y transformando las _ en espacios
     function updateItemsDropdown() {
         const itemsButton = $('.items'); 
         const itemsMenu = itemsButton.siblings('.dropdown-menu');
 
         if (selectedArtist && selectedCateg && selectedCateg !== 'todo') {
-        itemsButton.removeClass('disabled')
-        itemsMenu.empty();
+            itemsButton.removeClass('disabled')
+            itemsMenu.empty();
 
-        $('#home-crsl .col-3 img').each(function() {
-            const imageUrl = $(this).attr('src');  
-            const imageName = imageUrl.split('/').pop()
-                .replace(/_/g, ' ') 
-                .replace(/\.webp$/, '');  
-            const menuItem = $('<li class="itemName"><a class="dropdown-item" href="#">' + imageName + '</a></li>');
-            itemsMenu.append(menuItem);
-            menuItem.attr('data-image', imageUrl);        
-        });
+            $('#home-crsl .col-3 img').each(function() {
+                const imageUrl = $(this).attr('src');  
+                const imageName = imageUrl.split('/').pop()
+                    .replace(/_/g, ' ') 
+                    .replace(/\.webp$/, '');  
+                const menuItem = $('<li class="itemName"><a class="dropdown-item" href="#">' + imageName + '</a></li>');
+                itemsMenu.append(menuItem);
+                menuItem.attr('data-image', imageUrl);        
+            });
 
-        $('.itemName').hover(
-            function() {
-                const imageUrl = $(this).attr('data-image');
-                
-                $('#home-crsl .col-3 img').each(function() {
-                    if ($(this).attr('src') === imageUrl) {
-                        $(this).css('opacity', '1');
-                    } else {
-                        $(this).css('opacity', '0.5');
-                    }
-                });
-                $('.itemName').each(function() {
-                    if ($(this).attr('data-image') === imageUrl) {
-                        $(this).css('opacity', '1');
-                    } else {
-                        $(this).css('opacity', '0.5');
-                    }
-                });
-            },
-            function() {
-                $('#home-crsl .col-3 img').css('opacity', '1');
-                $('.itemName').css('opacity', '1');
-            }
-        );
-        
-    } else {
-        itemsButton.addClass('disabled')
+            // esto es para que al hacer hover en un item, el resto se baje la opacidad
+            $('.itemName').hover(
+                function() {
+                    const imageUrl = $(this).attr('data-image');
+                    $('#home-crsl .col-3 img').each(function() {
+                        if ($(this).attr('src') === imageUrl) {
+                            $(this).css('opacity', '1');
+                        } else {
+                            $(this).css('opacity', '0.5');
+                        }
+                    });
+                    $('.itemName').each(function() {
+                        if ($(this).attr('data-image') === imageUrl) {
+                            $(this).css('opacity', '1');
+                        } else {
+                            $(this).css('opacity', '0.5');
+                        }
+                    });
+                },
+                function() {
+                    $('#home-crsl .col-3 img').css('opacity', '1');
+                    $('.itemName').css('opacity', '1');
+                }
+            );
+        } else {
+            itemsButton.addClass('disabled')
+        }
     }
-    }
 
+
+    // para que el menu se abra por encima de las cosas con una altura
     $('.my-header-btn').click(function() {
         $('#header').css('height', '50%')
         headerHeight();
@@ -139,33 +172,7 @@ $(document).ready(function () {
         if ($('.btn.show').length === 0) {
             $('#header').css('height', '9%');
         }
-
     }
-
-
-    $('.dropdown-item[data-artist]').click(function() {
-        event.preventDefault();
-        event.stopPropagation();
-
-        selectedArtist = $(this).data('artist');
-
-        $('.dropdown-item[data-artist]').removeClass('selected');
-        $(this).addClass('selected');
-
-        updateCarousel();
-    });
-
-    $('.dropdown-item[data-categ]').click(function() {
-        event.preventDefault();
-        event.stopPropagation();
-
-        selectedCateg = $(this).data('categ');
-
-        $('.dropdown-item[data-categ]').removeClass('selected');
-        $(this).addClass('selected');
-
-        updateCarousel();
-    });
 
 
     // manejo del carrusel del home con drag
