@@ -52,6 +52,11 @@ $(document).ready(function () {
     // imagenes random que siguen el movimiento del raton
     var currentPage = window.location.pathname.split('/').pop();
     if (currentPage === 'index.html') {
+        $('#header').css({
+            'opacity': '0',
+            'pointer-events': 'none'
+        });
+        
         function handleMouseMove(event) {
             const img = document.createElement('img');
             img.src = getRandomImage();
@@ -73,7 +78,8 @@ $(document).ready(function () {
             document.removeEventListener('mousemove', handleMouseMove);
             $('#header').css({
                 'opacity': '1',
-                'pointer-events': 'all'
+                'pointer-events': 'all',
+                'transition': 'opacity .5s ease'
             });
         });
             
