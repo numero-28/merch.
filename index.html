@@ -15,7 +15,7 @@
         <main id="home-main">
           <div id="header">
             <div class="col-3 btn-group">
-                <button class="btn btn-secondary dropdown-toggle my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                   artistas
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -25,24 +25,21 @@
                 </ul>
             </div>
             <div class="col-3 btn-group">
-                <button class="btn btn-secondary dropdown-toggle my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  items
+                <button class="btn btn-secondary my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                  categorías
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" data-items="vinilos">vinilos</a></li>
-                  <li><a class="dropdown-item" data-items="camis">camis</a></li>
-                  <li><a class="dropdown-item" data-items="sudaderas">sudaderas</a></li>
+                  <li><a class="dropdown-item" data-categ="todo">todo</a></li>
+                  <li><a class="dropdown-item" data-categ="vinilos">vinilos</a></li>
+                  <li><a class="dropdown-item" data-categ="camis">camis</a></li>
+                  <li><a class="dropdown-item" data-categ="sudaderas">sudaderas</a></li>
                 </ul>
             </div>
             <div class="col-3 btn-group">
-                <button class="btn btn-secondary dropdown-toggle my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                <button class="btn btn-secondary my-header-btn items disabled" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true" data-bs-auto-close="false">
+                  items
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="#">Menu item</a></li>
-                  <li><a class="dropdown-item" href="#">Menu item</a></li>
-                  <li><a class="dropdown-item" href="#">Menu item</a></li>
-                </ul>
+                <ul class="dropdown-menu itemsUl show" aria-labelledby="dropdownMenuButton" data-popper-placement="bottom-start"></ul>
             </div>
           </div>
 

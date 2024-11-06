@@ -2,90 +2,131 @@ $(document).ready(function () {
     
     const artists = {
         depresionsonora: [
-            'media/ds_elarte_ep.webp',
-            'media/ds_elarte_cami.webp',
-            'media/ds_elarte_sud.webp',
-            'media/ds_makinavaja_ep.webp',
-            'media/ds_makinavaja_cami.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
+            'media/Makinavaja_-_EP.webp',
+            'media/Makinavaja_-_Camiseta.webp',
 
         ],
         carolinadurante: [
-            'media/cd_elige_lp.webp',
-            'media/cd_hamb_cami.webp',
-            'media/cd_4chav_lp.webp',
-            'media/cd_cd_lp.webp',
-            'media/cd_elige_cami.webp',
+            'media/Elige_Tu_Propia_Aventura_-_LP.webp',
+            'media/Hamburguesas_-_Camiseta.webp',
+            'media/Cuatro_Chavales_-_LP.webp',
+            'media/Carolina_Durante_-_LP.webp',
+            'media/Elige_Tu_Propia_Aventura_-_Camiseta.webp',
         ]
     };
 
-    const items = {
+    const categs = {
         vinilos: [
-            'media/ds_elarte_ep.webp',
-            'media/ds_makinavaja_ep.webp',
-            'media/cd_4chav_lp.webp',
-            'media/cd_elige_lp.webp',
-            'media/cd_cd_lp.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp',
+            'media/Makinavaja_-_EP.webp',
+            'media/Cuatro_Chavales_-_LP.webp',
+            'media/Elige_Tu_Propia_Aventura_-_LP.webp',
+            'media/Carolina_Durante_-_LP.webp',
         ],
         camis: [
-            'media/ds_elarte_cami.webp',
-            'media/ds_makinavaja_cami.webp',
-            'media/cd_hamb_cami.webp',
-            'media/cd_elige_cami.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
+            'media/Makinavaja_-_Camiseta.webp',
+            'media/Hamburguesas_-_Camiseta.webp',
+            'media/Elige_Tu_Propia_Aventura_-_Camiseta.webp',
         ],
         sudaderas: [
-            'media/ds_elarte_sud.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
         ]
     };
     
-     $('.dropdown-item[data-artist]').on('click', function () {
-        event.preventDefault(); // Prevent the default link behavior
-        event.stopPropagation();
-        const selectedArtist = $(this).data('artist');
-         $('.dropdown-item[data-artist]').removeClass('selected');
+    let selectedArtist = null;
+    let selectedCateg = null;
 
-        // Mark the clicked item as selected
-        $(this).addClass('selected');
-        const images = artists[selectedArtist];
-
-        // Clear the carousel
+    function updateCarousel() {
         $('#home-crsl').empty();
 
-        // Check if there are images for the selected artist
-        if (images && images.length > 0) {
-            images.forEach(function (imageSrc) {
-                const imageDiv = $('<div class="col-3"></div>');
-                const imageElement = $('<img>', {
-                    src: imageSrc,
-                    alt: '',
+        if (!selectedArtist && !selectedCateg) return; 
+
+        let imagesToShow = [];
+
+        if (selectedCateg === 'todo') {
+            if (selectedArtist && artists[selectedArtist]) {
+                imagesToShow = artists[selectedArtist];
+            } else {
+                Object.values(artists).forEach(images => {
+                    imagesToShow = imagesToShow.concat(images);
                 });
-                
-                imageDiv.append(imageElement);
-                $('#home-crsl').append(imageDiv);
-            });
+            }
+        } else {
+            if (selectedArtist && artists[selectedArtist]) {
+                imagesToShow = artists[selectedArtist];
+            }
+            
+            if (selectedCateg && categs[selectedCateg]) {
+                if (imagesToShow.length > 0) {
+                    imagesToShow = imagesToShow.filter(image => categs[selectedCateg].includes(image));
+                } else {
+                    imagesToShow = categs[selectedCateg];
+                }
+            }
         }
+
+        imagesToShow.forEach(function (imageSrc) {
+            const imageDiv = $('<div class="col-3"></div>');
+            const imageElement = $('<img>', {
+                src: imageSrc,
+                alt: '',
+            });
+
+            imageDiv.append(imageElement);
+            $('#home-crsl').append(imageDiv);
+        });
+        updateItemsDropdown();
+    }
+
+    function updateItemsDropdown() {
+        const itemsButton = $('.items'); 
+        const itemsMenu = itemsButton.siblings('.dropdown-menu');
+
+        if (selectedArtist && selectedCateg && selectedCateg !== 'todo') {
+        itemsButton.removeClass('disabled')
+        itemsMenu.empty();
+
+        $('#home-crsl .col-3 img').each(function() {
+            const imageUrl = $(this).attr('src');  
+            const imageName = imageUrl.split('/').pop()
+                .replace(/_/g, ' ') 
+                .replace(/\.webp$/, '');  
+            const menuItem = $('<li><a class="dropdown-item" href="#">' + imageName + '</a></li>');
+            itemsMenu.append(menuItem);
+        });
+        
+    } else {
+        itemsButton.addClass('disabled')
+    }
+    }
+
+
+    $('.dropdown-item[data-artist]').on('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        selectedArtist = $(this).data('artist');
+
+        $('.dropdown-item[data-artist]').removeClass('selected');
+        $(this).addClass('selected');
+
+        updateCarousel();
     });
 
-    // Handle items dropdown
-    $('.dropdown-item[data-items]').on('click', function () {
-        const selectedItem = $(this).data('items');
-        const images = items[selectedItem];
+    $('.dropdown-item[data-categ]').on('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-        // Clear the carousel
-        $('#home-crsl').empty();
+        selectedCateg = $(this).data('categ');
 
-        // Check if there are images for the selected item
-        if (images && images.length > 0) {
-            images.forEach(function (imageSrc) {
-                const imageDiv = $('<div class="col-3"></div>');
-                const imageElement = $('<img>', {
-                    src: imageSrc,
-                    alt: '',
-                });
+        $('.dropdown-iem[data-categ]').removeClass('selected');
+        $(this).addClass('selected');
 
-                imageDiv.append(imageElement);
-                $('#home-crsl').append(imageDiv);
-            });
-        }
+        updateCarousel();
     });
 
 
@@ -122,7 +163,7 @@ $(document).ready(function () {
     });
 
 
-
+    
 
 
 });

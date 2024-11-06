@@ -1,3 +1,5 @@
+
+
 * {
     padding: 0;
     margin: 0;
@@ -18,10 +20,13 @@
 
 :root {
     --g: #202020;
+    --w: #ffffffa4;
 }
 
 #header {
     margin: 1rem;
+    height: 60%;
+    background-color: var(--w);
 }
 
 .my-header-btn {
@@ -41,7 +46,17 @@
 .dropdown-toggle::after {
     display: none;
 }
-
+.btn.disabled {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+.itemsUl {
+    position: absolute; 
+    inset: 0px auto auto 0px; 
+    margin: 0px; 
+    transform: translate3d(0px, 35px, 0px);
+}
 .btn:hover, 
 .btn-group>.btn:active, 
 .btn:focus-visible {
@@ -50,6 +65,10 @@
 }
 .dropdown-menu {
     border-color: transparent;
+    --bs-dropdown-bg: var(--w);
+}
+.selected {
+    font-weight: bold;
 }
 #home-main {
     height: 100vh;
@@ -75,7 +94,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     overflow: hidden;
-    align-items: center;
+    align-items: flex-end;
     cursor: grab;
     user-select: none;
 }
@@ -84,8 +103,9 @@
     object-fit: cover;
     pointer-events: none;
 }
-#home-scrl .col-3 {
+#home-crsl .col-3 {
     width: 30%;
+    padding: 1.5rem;
 }
 
 /* product page */
