@@ -95,17 +95,47 @@ $(document).ready(function () {
             const imageName = imageUrl.split('/').pop()
                 .replace(/_/g, ' ') 
                 .replace(/\.webp$/, '');  
-            const menuItem = $('<li><a class="dropdown-item" href="#">' + imageName + '</a></li>');
+            const menuItem = $('<li class="itemName"><a class="dropdown-item" href="#">' + imageName + '</a></li>');
             itemsMenu.append(menuItem);
+            menuItem.attr('data-image', imageUrl);        
         });
+
+        $('.itemName').hover(
+            function() {
+                const imageUrl = $(this).attr('data-image');
+                
+                $('#home-crsl .col-3 img').each(function() {
+                    if ($(this).attr('src') === imageUrl) {
+                        $(this).css('opacity', '1');
+                    } else {
+                        $(this).css('opacity', '0.5');
+                    }
+                });
+                $('.itemName').each(function() {
+                    if ($(this).attr('data-image') === imageUrl) {
+                        $(this).css('opacity', '1');
+                    } else {
+                        $(this).css('opacity', '0.5');
+                    }
+                });
+            },
+            function() {
+                $('#home-crsl .col-3 img').css('opacity', '1');
+                $('.itemName').css('opacity', '1');
+            }
+        );
         
     } else {
         itemsButton.addClass('disabled')
     }
     }
 
+    $('.my-header-btn').click(function() {
+        $('#header').css('height', '60%')
+    });
 
-    $('.dropdown-item[data-artist]').on('click', function (event) {
+
+    $('.dropdown-item[data-artist]').click(function() {
         event.preventDefault();
         event.stopPropagation();
 
@@ -117,13 +147,13 @@ $(document).ready(function () {
         updateCarousel();
     });
 
-    $('.dropdown-item[data-categ]').on('click', function (event) {
+    $('.dropdown-item[data-categ]').click(function() {
         event.preventDefault();
         event.stopPropagation();
 
         selectedCateg = $(this).data('categ');
 
-        $('.dropdown-iem[data-categ]').removeClass('selected');
+        $('.dropdown-item[data-categ]').removeClass('selected');
         $(this).addClass('selected');
 
         updateCarousel();
@@ -158,11 +188,11 @@ $(document).ready(function () {
         if (!isDragging) return;
         e.preventDefault();
         const x = e.pageX - $carousel.offset().left;
-        const walk = (x - startX) * 2; 
+        const walk = (x - startX) * 1.3; 
         $carousel.scrollLeft(scrollLeft - walk);
     });
 
-
+    
     
 
 
