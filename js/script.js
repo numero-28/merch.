@@ -372,6 +372,20 @@ $(document).ready(function () {
         }
     });   
 
+    $(".add").click(function() {
+        // Seleccionar el span dentro del botón de "carro"
+        var badge = $(".btn-group .badge");
+
+        // Si el badge está oculto, quitar la clase .none para mostrarlo
+        if (badge.hasClass("none")) {
+            badge.removeClass("none");
+            badge.text("1"); // Iniciar el contador en 1
+        } else {
+            // Si ya está visible, incrementar el número en 1
+            var currentCount = parseInt(badge.text());
+            badge.text(currentCount + 1);
+        }
+    });
 
 });
 

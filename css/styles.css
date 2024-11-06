@@ -103,6 +103,21 @@
     font-weight: bold;
     font-family: var(--helve-bold);
 }
+
+#header .col-1 {
+    margin-left: 15.63%;
+}
+
+#header .col-1 button {
+    text-align: end;
+}
+
+.none {
+    color: transparent;
+    background-color: transparent!important;
+    border-color: transparent;
+}
+
 #home-main {
     height: 100vh;
     width: 100vw;
