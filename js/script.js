@@ -38,6 +38,48 @@ $(document).ready(function () {
         ]
     };
     
+    // PRELANDING HOME
+    // un array que recopile todas las imagenes de la web
+    const artistImages = Object.values(artists).flat();
+    const categImages = Object.values(categs).flat();
+    const allImages = [...new Set([...artistImages, ...categImages])];
+
+    function getRandomImage() {
+        const randomIndex = Math.floor(Math.random() * allImages.length);
+        return allImages[randomIndex];
+    }
+
+    // imagenes random que siguen el movimiento del raton
+    var currentPage = window.location.pathname.split('/').pop();
+    if (currentPage === 'index.html') {
+        function handleMouseMove(event) {
+            const img = document.createElement('img');
+            img.src = getRandomImage();
+            img.style.position = 'absolute';
+            img.style.width = '10%'; 
+            img.style.pointerEvents = 'none'; 
+            img.style.left = `${event.pageX}px`;
+            img.style.top = `${event.pageY}px`;
+
+            document.body.appendChild(img);
+
+            setTimeout(() => {
+                img.remove();
+            }, 2000); 
+        }
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('click', () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            $('#header').css({
+                'opacity': '1',
+                'pointer-events': 'all'
+            });
+        });
+            
+    }
+
+
 
     // CARRUSEL DE IMÁGENES HOME
     let selectedArtist = null;
