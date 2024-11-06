@@ -131,8 +131,15 @@ $(document).ready(function () {
     }
 
     $('.my-header-btn').click(function() {
-        $('#header').css('height', '60%')
+        $('#header').css('height', '50%')
+        headerHeight();
     });
+    function headerHeight() {
+        if ($('.btn.show').length === 0) {
+            $('#header').css('height', '9%');
+        }
+
+    }
 
 
     $('.dropdown-item[data-artist]').click(function() {
