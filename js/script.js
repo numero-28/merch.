@@ -78,6 +78,7 @@ $(document).ready(function () {
 
             imageDiv.append(imageElement);
             $('#home-crsl').append(imageDiv);
+            $('#product-buttons.crsl-arrows div').css('color', 'var(--f)');
         });
         updateItemsDropdown();
     }
@@ -167,39 +168,62 @@ $(document).ready(function () {
     });
 
 
-    const $carousel = $('#home-crsl');
+    // manejo del carrusel del home con drag
+    const crsl = $('#home-crsl');
     let isDragging = false;
     let startX;
     let scrollLeft;
 
-    $carousel.on('mousedown', function (e) {
+    crsl.on('mousedown', function (e) {
         isDragging = true;
-        startX = e.pageX - $carousel.offset().left;
-        scrollLeft = $carousel.scrollLeft();
-        $carousel.css('cursor', 'grabbing');
+        startX = e.pageX - crsl.offset().left;
+        scrollLeft = crsl.scrollLeft();
     });
 
     $(document).on('mouseup', function () {
         isDragging = false;
-        $carousel.css('cursor', 'grab');
     });
 
-    $carousel.on('mouseleave', function () {
+    crsl.on('mouseleave', function () {
         if (isDragging) {
             isDragging = false;
-            $carousel.css('cursor', 'grab');
         }
     });
+    
 
-    $carousel.on('mousemove', function (e) {
+    // manejo del carrusel del home con flechitas
+    crsl.on('mousemove', function (e) {
         if (!isDragging) return;
         e.preventDefault();
-        const x = e.pageX - $carousel.offset().left;
+        const x = e.pageX - crsl.offset().left;
         const walk = (x - startX) * 1.3; 
-        $carousel.scrollLeft(scrollLeft - walk);
+        crsl.scrollLeft(scrollLeft - walk);
     });
 
+    function scrollCarousel(direction) {
+        const scrollAmount = crsl.width() * 0.3; 
+        const currentScroll = crsl.scrollLeft();
+        crsl.animate({
+            scrollLeft: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount
+        }, 300); 
+    }
+
+    $('.arrow.left').on('click', function() {
+        scrollCarousel('left');
+    });
+    $('.arrow.right').on('click', function() {
+        scrollCarousel('right');
+    });
     
+
+    // manejo del carrusel del home con scroll
+    crsl.on('wheel', function(e) {
+        e.preventDefault();
+        const delta = e.originalEvent.deltaY; 
+        const scrollAmount = 10; 
+
+        crsl.scrollLeft(crsl.scrollLeft() + (delta > 0 ? scrollAmount : -scrollAmount));
+    });
     
 
 

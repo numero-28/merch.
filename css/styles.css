@@ -36,6 +36,7 @@
 :root {
     --g: #202020;
     --w: #ffffffa4;
+    --f: #fff;
 }
 
 #header {
@@ -102,7 +103,7 @@
     max-height: 100vh;
     max-width: 100vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-direction: column;
 }
 #main-container {
@@ -137,6 +138,17 @@
 }
 .itemName {
     transition: opacity .3s ease-in-out;
+}
+#product-buttons.crsl-arrows {
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+}
+#product-buttons.crsl-arrows div {
+    color: transparent;
+    mix-blend-mode: difference;
+    pointer-events: all;
 }
 
 /* product page */
@@ -250,7 +262,6 @@
 }
 
 #product-buttons div {
-    color: var(--g);
     font-size: 2rem;
     font-family: 'helve thin';
     cursor: pointer;
