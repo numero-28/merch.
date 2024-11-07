@@ -54,7 +54,7 @@
     padding: 1rem;
     height: 9%;
     background-color: var(--w);
-    transition: height .6s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: height .6s cubic-bezier(0.19, 1, 0.22, 1), top 0.5s ease;
 }
 
 .my-header-btn {
@@ -147,8 +147,8 @@
     flex-direction: row;
     flex-wrap: nowrap;
     overflow: hidden;
+    pointer-events: none;
     align-items: flex-end;
-    cursor: grab;
     user-select: none;
     scroll-behavior: unset;
 }
@@ -332,7 +332,7 @@ i img {
     overflow-y: auto;
 }
 
-#product-box, #gallery-main, #header, #product-info {
+#product-box, #gallery-main, #product-info {
     transition: top 0.5s ease;
 }
 
