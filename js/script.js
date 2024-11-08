@@ -1,4 +1,19 @@
+// LENIS
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+});
+
+function raf(time) {
+    lenis.raf(time);
+    ScrollTrigger.update();
+    requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+
 $(document).ready(function () {
+
     
     // arrays de artistas y de categorias
     const artists = {
@@ -92,31 +107,40 @@ $(document).ready(function () {
     let selectedCateg = null;
 
     // para que recoja el input de a qué le das y lo ponga en negrita
-    $('.dropdown-item[data-artist]').click(function() {
+    $('.dropdown-item[data-artist]').click(function(event) {
         event.preventDefault();
         event.stopPropagation();
 
-        selectedArtist = $(this).data('artist');
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected'); 
+            selectedArtist = null; 
+        } else {
+            $('.dropdown-item[data-artist]').removeClass('selected'); 
+            $(this).addClass('selected'); 
+            selectedArtist = $(this).data('artist');
+        }
 
-        $('.dropdown-item[data-artist]').removeClass('selected');
-        $(this).addClass('selected');
         $('#home-crsl').css('pointer-events', 'all');
-
         updateCarousel();
     });
 
-    $('.dropdown-item[data-categ]').click(function() {
+    $('.dropdown-item[data-categ]').click(function(event) {
         event.preventDefault();
         event.stopPropagation();
 
-        selectedCateg = $(this).data('categ');
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected'); 
+            selectedCateg = null; 
+        } else {
+            $('.dropdown-item[data-categ]').removeClass('selected');
+            $(this).addClass('selected');
+            selectedCateg = $(this).data('categ');
+        }
 
-        $('.dropdown-item[data-categ]').removeClass('selected');
-        $(this).addClass('selected');
         $('#home-crsl').css('pointer-events', 'all');
-
         updateCarousel();
     });
+
 
     // aquí básicamente ve qué tiene que devolverte dependiendo del input
     function updateCarousel() {
@@ -150,7 +174,7 @@ $(document).ready(function () {
 
         // y aquí te crea tantas imagenes como elementos tenga que mostrar dependiendo de los inputs
         imagesToShow.forEach(function (imageSrc) {
-            const imageDiv = $('<div class="col-3"></div>');
+            const imageDiv = $('<div class="col-xl-3 col-6 crslitems"></div>');
             const imageElement = $('<img>', {
                 src: imageSrc,
                 alt: '',
@@ -160,6 +184,7 @@ $(document).ready(function () {
             $('#home-crsl').append(imageDiv);
             $('#product-buttons.crsl-arrows div').css('color', 'var(--f)');
 
+            
         });
         updateItemsDropdown();
     }
@@ -171,10 +196,11 @@ $(document).ready(function () {
         const itemsMenu = itemsButton.siblings('.dropdown-menu');
 
         if (selectedArtist && selectedCateg && selectedCateg !== 'todo') {
-            itemsButton.removeClass('disabled')
+            itemsButton.removeClass('disabled');
+            $('.itemsUl').addClass('show');
             itemsMenu.empty();
 
-            $('#home-crsl .col-3 img').each(function() {
+            $('#home-crsl .crslitems img').each(function() {
                 const imageUrl = $(this).attr('src');  
                 const imageName = imageUrl.split('/').pop()
                     .replace(/_/g, ' ') 
@@ -188,7 +214,7 @@ $(document).ready(function () {
             $('.itemName').hover(
                 function() {
                     const imageUrl = $(this).attr('data-image');
-                    $('#home-crsl .col-3 img').each(function() {
+                    $('#home-crsl .crslitems img').each(function() {
                         if ($(this).attr('src') === imageUrl) {
                             $(this).css('opacity', '1');
                         } else {
@@ -204,21 +230,25 @@ $(document).ready(function () {
                     });
                 },
                 function() {
-                    $('#home-crsl .col-3 img').css('opacity', '1');
+                    $('#home-crsl .crslitems img').css('opacity', '1');
                     $('.itemName').css('opacity', '1');
                 }
             );
         } else {
-            itemsButton.addClass('disabled')
+            itemsButton.addClass('disabled');
+            $('.itemsUl').removeClass('show');
+
         }
     }
 
 
     // para que el menu se abra por encima de las cosas con una altura
-    $('.my-header-btn').click(function() {
-        $('#header').css('height', '50%')
-        headerHeight();
-    });
+    if ($(window).width() > 576) {
+        $('.my-header-btn').click(function() {
+            $('#header').css('height', '50%')
+            headerHeight();
+        });
+    }
     function headerHeight() {
         if ($('.btn.show').length === 0) {
             $('#header').css('height', '9%');
@@ -262,7 +292,13 @@ $(document).ready(function () {
     });
 
     function scrollCarousel(direction) {
-        const scrollAmount = crsl.width() * 0.3; 
+        let scrollAmount;
+        if ($(window).width() < 576) {
+            scrollAmount = crsl.width() * 0.6; 
+        } else {
+            scrollAmount = crsl.width() * 0.3;
+        }
+ 
         const currentScroll = crsl.scrollLeft();
         crsl.animate({
             scrollLeft: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount
@@ -278,14 +314,55 @@ $(document).ready(function () {
     
 
     // manejo del carrusel del home con scroll
+    const crslScrl = $('#home-crsl');
+
+    let crslItems = gsap.utils.toArray('.crslitems');
+
+    gsap.to(crslItems, {
+        xPercent: -100 * (crslItems.length - 1),
+        ease: 'sine.out',
+        scrollTrigger: {
+            trigger: crslItems,
+            pin: true,
+            scrub: 3,
+            snap: 1 / (crslItems.length - 1),
+            end: '+=' + crslScrl.offsetWidth
+        }
+    })
+    
     crsl.on('wheel', function(e) {
         e.preventDefault();
         const delta = e.originalEvent.deltaY; 
-        const scrollAmount = 10; 
+        const scrollAmount = 90;
 
-        crsl.scrollLeft(crsl.scrollLeft() + (delta > 0 ? scrollAmount : -scrollAmount));
+        gsap.to('#home-crsl', {
+            scrollLeft: '+=' + (delta > 0 ? scrollAmount : -scrollAmount), 
+            ease: "power1.out",
+            duration: 0.8
+        });
     });
 
+    let isSwiping = false;
+    let startTouchX;
+    let touchScrollLeft;
+
+    crsl.on('touchstart', function (e) {
+        isSwiping = true;
+        startTouchX = e.originalEvent.touches[0].pageX - crsl.offset().left;
+        touchScrollLeft = crsl.scrollLeft();
+    });
+
+    crsl.on('touchmove', function (e) {
+        if (!isSwiping) return;
+        e.preventDefault();
+        const x = e.originalEvent.touches[0].pageX - crsl.offset().left;
+        const walk = (x - startTouchX) * 1.2; 
+        crsl.scrollLeft(touchScrollLeft - walk);
+    });
+
+    crsl.on('touchend', function () {
+        isSwiping = false;
+    });
 
     // Seleccionar todas las imágenes dentro de #gallery-main
     $("#gallery-main img").click(function(){
@@ -395,3 +472,37 @@ $(document).ready(function () {
 
 });
 
+
+
+// responsive
+if ($(window).width() < 576) {
+
+    $('#header .btn-group').each(function() {
+        $(this).on('click', function() {
+            const btn = $(this).find('button');
+            const dropMenu = $(this).find('.dropdown-menu');
+            const dropHeight = btn.outerHeight() + dropMenu.outerHeight();
+            
+            if ($(this).css('margin-bottom') === '0px') {
+                $(this).css({
+                    'margin-bottom': (dropHeight) + 'px' 
+                });
+            } else {
+                $(this).css({
+                    'margin-bottom': '0' 
+                });
+            }
+        });
+    });
+}
+$('.menubtn').click(function() {
+    if ($(this).text() === 'menu') {
+        $('#header .btn-group').css('display', 'block');
+        $('#header').css('height', '100%')
+        $(this).text('cerrar');
+    } else if(($(this).text() === 'cerrar')){
+        $('#header .btn-group').css('display', 'none');
+        $(this).text('menu');
+        $('#header').css('height', '9%')
+    }
+})
