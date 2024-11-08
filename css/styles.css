@@ -117,11 +117,11 @@
     font-family: var(--helve-bold);
 }
 
-#header .col-1 {
-    margin-left: 15.63%;
+#header .col-xl-1 {
+    margin-left: 15%;
 }
 
-#header .col-1 button {
+#header .col-xl-1 button {
     text-align: end;
 }
 
@@ -200,7 +200,7 @@
     overflow: hidden;
 }
 
-#gallery-main.col-11 {
+#gallery-main {
     height: 45%;
     display: flex;
     flex-direction: row;
@@ -228,38 +228,33 @@
     cursor: pointer;
 }
 
-#gallery-main .col-4 {
+#gallery-main .col-xl-4 {
     height: 100%;
-    width: 40%;
     display: flex;
 }
 
-#product-gallery.col-6 {
-    width: 60%;
-}
-
-#product-gallery .col-2 {
-    height: 50%;
+#product-gallery .col-xl-2 {
     width: 40%;
+    height: 50%;
     display: flex;
     float: left;
 }
 
-#product-gallery .col-5 {
+#product-gallery .col-xl-5 {
     height: 50%;
     width: 80%;
     float: left;
     display: flex;
 }
 
-#product-gallery .col-1 {
+#product-gallery .col-xl-1 {
     height: 50%;
     width: 20%;
     display: flex;
     float: left;
 }
 
-#product-gallery .col-1.long img {
+#product-gallery .col-xl-1.long img {
     height: 200%;
 }
 
@@ -350,8 +345,7 @@ i img {
     top: 60vh; 
 }
 
-
-#product-info div {
+#product-info>div {
     height: 50%;
     width: 48%;
     display: flex;
@@ -407,15 +401,95 @@ i img {
 }
 
 
+/* RESPONSIVE */
+/* PARA TAMAÑOS GRANDES POR QUE BOOSTRAP ES ESPECIAL */
+@media (min-width: 768px) {
+    #gallery-main .col-xl-4 {
+        width: 40%;
+    }
 
-@media only screen and (min-width: 1200px) {
-    #home-crsl .col-xl-3 {
+    #product-gallery.col-xl-6 {
+        width: 60%;
+    }
+     #home-crsl .col-xl-3 {
         width: 30%;
     }
+    
 }
 
 
-@media only screen and (max-width: 576px) {
+/* TABLET */
+@media (max-width: 768px) {
+    #header .col-1 {
+        margin-left: 8%;
+    }
+
+    #gallery-main {
+        height: 55%;
+        flex-direction: column;
+    }
+
+    #product-gallery {
+        height: 30%;
+    }
+
+    #gallery-main .col-xl-4 {
+        height: 70%;
+    }
+
+    #product-box {
+        top: 63%;
+        height: 36%;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    #product-text .sub {
+        margin-top: 0;
+    }
+
+    #carousel {
+        align-items: center;
+    }
+
+    .carousel-image {
+        width: auto;
+        height: 70%;
+    }
+
+    #product-info>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #product-info div.info-text {
+        font-size: 0.9rem;
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 576px) {
+    
+    .carousel-image {
+        width: 100%;
+        height: fit-content;
+    }
+
+    .carousel-arrow-left, .carousel-arrow-right {
+        top: 85vh;
+    }
+
+    .carousel-arrow-left {
+        left: 25vw;
+    }
+
+    .carousel-arrow-right {
+        right: 25vw;
+    }
     #home-crsl img {
         width: 100%;
     }
@@ -426,3 +500,11 @@ i img {
         display: none;
     }
 }
+
+
+
+
+
+
+
+

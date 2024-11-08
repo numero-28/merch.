@@ -438,33 +438,45 @@ $(document).ready(function () {
         var productInfo = $("#product-info");
         var isVisible = productInfo.hasClass("visible");
 
-        // Alternar la clase 'visible' en #product-info
         productInfo.toggleClass("visible");
 
-        // Ajustar las posiciones de las otras secciones
+        var isMobile = window.innerWidth <= 768;
+
         if (!isVisible) {
-            $("#product-box").css("top", "14%");      // 54% - 40% (altura de #product-info)
-            $("#gallery-main").css("top", "-31%");    // 9% - 40%
-            $("#header").css("top", "-40%");          // 0 - 40%
-            $("#product-bt-info div:first-child").text("- info");      // Cambiar el texto a "-"
+            if (isMobile) {
+                $("#product-box").css("top", "23%");      
+                $("#gallery-main").css("top", "-32%");    
+                $("#header").css("top", "-40%");          
+            } else {
+                $("#product-box").css("top", "14%");    
+                $("#gallery-main").css("top", "-31%");     
+                $("#header").css("top", "-40%");           
+            }
+            $("#product-bt-info div:first-child").text("- info"); 
         } else {
-            $("#product-box").css("top", "54%");      // Posición original
-            $("#gallery-main").css("top", "9%");      // Posición original
-            $("#header").css("top", "0");             // Posición original
-            $("#product-bt-info div:first-child").text("+ info");      // Cambiar el texto a "+"
+            if (isMobile) {
+                $("#product-box").css("top", "63%");      
+                $("#gallery-main").css("top", "9%");      
+                $("#header").css("top", "0");             
+            } else {
+                $("#product-box").css("top", "54%");     
+                $("#gallery-main").css("top", "9%");     
+                $("#header").css("top", "0");            
+            }
+            $("#product-bt-info div:first-child").text("+ info"); 
         }
-    });   
+    });
+
+
+    // AÑADIR ELEMENTOS AL CARRITO
 
     $(".add").click(function() {
-        // Seleccionar el span dentro del botón de "carro"
         var badge = $(".btn-group .badge");
 
-        // Si el badge está oculto, quitar la clase .none para mostrarlo
         if (badge.hasClass("none")) {
             badge.removeClass("none");
-            badge.text("1"); // Iniciar el contador en 1
+            badge.text("1"); 
         } else {
-            // Si ya está visible, incrementar el número en 1
             var currentCount = parseInt(badge.text());
             badge.text(currentCount + 1);
         }
