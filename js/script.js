@@ -14,7 +14,6 @@ requestAnimationFrame(raf);
 
 $(document).ready(function () {
 
-    
     // arrays de artistas y de categorias
     const artists = {
         depresionsonora: [
@@ -66,7 +65,7 @@ $(document).ready(function () {
 
     // imagenes random que siguen el movimiento del raton
     var currentPage = window.location.pathname.split('/').pop();
-    if (currentPage === 'index.html') {
+    if (currentPage === 'index.html' && $(window).width() > 576){
         $('#header').css({
             'opacity': '0',
             'pointer-events': 'none'
@@ -104,7 +103,14 @@ $(document).ready(function () {
 
     // CARRUSEL DE IMÁGENES HOME
     let selectedArtist = null;
-    let selectedCateg = null;
+    let selectedCateg;
+    if ($(window).width() < 576) {
+        selectedCateg = 'todo';
+    } else {
+        selectedCateg = null;
+    }
+    updateCarousel();
+
 
     // para que recoja el input de a qué le das y lo ponga en negrita
     $('.dropdown-item[data-artist]').click(function(event) {
@@ -171,6 +177,7 @@ $(document).ready(function () {
                 }
             }
         }
+
 
         // y aquí te crea tantas imagenes como elementos tenga que mostrar dependiendo de los inputs
         imagesToShow.forEach(function (imageSrc) {
@@ -506,7 +513,9 @@ if ($(window).width() < 576) {
             }
         });
     });
+
 }
+
 $('.menubtn').click(function() {
     if ($(this).text() === 'menu') {
         $('#header .btn-group').css('display', 'block');
