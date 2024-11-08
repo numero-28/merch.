@@ -4,7 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
+    scroll-behavior: initial;
     font-size: 11pt;
 }
 
@@ -39,7 +39,7 @@
 
 :root {
     --g: #202020;
-    --w: #ffffffa4;
+    --w: #ffffffd1;
     --f: #fff;
     --helve-bold: 'helve bold';
     --helve-thin: 'helve thin';
@@ -47,6 +47,9 @@
 }
 
 #header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     position: absolute;
     z-index: 3;
     top: 0;
@@ -56,13 +59,19 @@
     background-color: var(--w);
     transition: height .6s cubic-bezier(0.19, 1, 0.22, 1), top 0.5s ease;
 }
-
+.btn-group {
+    margin-bottom: 0px;
+    transition: margin-bottom .5s ease-in-out;
+}
 .my-header-btn {
     background: transparent;
     color: var(--g);
     text-align: start;
     border: none;
     font-family: var(--helve-normal);
+}
+.menubtn {
+    margin-bottom: 1.2rem;
 }
 .btn-secondary {
     --bs-btn-active-bg: transparent;
@@ -150,7 +159,6 @@
     pointer-events: none;
     align-items: flex-end;
     user-select: none;
-    scroll-behavior: unset;
 }
 #home-crsl img {
     width: 85%;
@@ -158,8 +166,10 @@
     pointer-events: none;
     transition: opacity .3s ease-in-out;
 }
+#home-crsl .col-6 {
+    width: 60%;
+}
 #home-crsl .col-xl-3 {
-    width: 30%;
     padding: 1.5rem;
 }
 .itemName {
@@ -401,6 +411,9 @@ i img {
     #product-gallery.col-xl-6 {
         width: 60%;
     }
+     #home-crsl .col-xl-3 {
+        width: 30%;
+    }
     
 }
 
@@ -459,7 +472,7 @@ i img {
 
 }
 
-@media (max-width: 450px) {
+@media (max-width: 576px) {
     
     .carousel-image {
         width: 100%;
@@ -477,6 +490,21 @@ i img {
     .carousel-arrow-right {
         right: 25vw;
     }
+    #home-crsl img {
+        width: 100%;
+    }
+    #header {
+        flex-direction: column;
+    }
+    #header .btn-group {
+        display: none;
+    }
 }
+
+
+
+
+
+
 
 
