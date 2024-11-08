@@ -100,6 +100,7 @@ $(document).ready(function () {
 
         $('.dropdown-item[data-artist]').removeClass('selected');
         $(this).addClass('selected');
+        $('#home-crsl').css('pointer-events', 'all');
 
         updateCarousel();
     });
@@ -112,6 +113,7 @@ $(document).ready(function () {
 
         $('.dropdown-item[data-categ]').removeClass('selected');
         $(this).addClass('selected');
+        $('#home-crsl').css('pointer-events', 'all');
 
         updateCarousel();
     });
@@ -157,6 +159,7 @@ $(document).ready(function () {
             imageDiv.append(imageElement);
             $('#home-crsl').append(imageDiv);
             $('#product-buttons.crsl-arrows div').css('color', 'var(--f)');
+
         });
         updateItemsDropdown();
     }
@@ -233,16 +236,19 @@ $(document).ready(function () {
         isDragging = true;
         startX = e.pageX - crsl.offset().left;
         scrollLeft = crsl.scrollLeft();
+        crsl.css('cursor', 'grabbing');
     });
 
     $(document).on('mouseup', function () {
         isDragging = false;
+        crsl.css('cursor', 'grab');
     });
 
     crsl.on('mouseleave', function () {
         if (isDragging) {
             isDragging = false;
         }
+        crsl.css('cursor', 'pointer');
     });
     
 
