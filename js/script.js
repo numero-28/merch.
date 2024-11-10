@@ -75,7 +75,7 @@ $(document).ready(function () {
     })();
     
 
-    // arrays de artistas y de categorias
+    // ARRAYS ARTISTAS Y CATEGORIAS
     const artists = {
         depresionsonora: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp',
@@ -366,9 +366,12 @@ $(document).ready(function () {
                 click: function() {
                     if (imageSrc === 'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp') {
                         localStorage.setItem('selectedProduct', 'depson');
-                        
                     } else if (imageSrc === 'media/Judeline_-_Pareo.webp') {
                         localStorage.setItem('selectedProduct', 'judeline');
+                    } else if (imageSrc === 'media/Cariño_-_Camiseta.webp') {
+                        localStorage.setItem('selectedProduct', 'cariño');
+                    } else {
+                        return;
                     }
                     window.location.href = 'product.html';
                 }
@@ -403,7 +406,23 @@ $(document).ready(function () {
                     .replace(/\.webp$/, '');  
                 const menuItem = $('<li class="itemName"><a class="dropdown-item" href="#">' + imageName + '</a></li>');
                 itemsMenu.append(menuItem);
-                menuItem.attr('data-image', imageUrl);        
+                menuItem.attr('data-image', imageUrl);  
+
+                 menuItem.click(function() {
+                    const selectedImageSrc = $(this).attr('data-image'); 
+
+                    if (selectedImageSrc === 'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp') {
+                        localStorage.setItem('selectedProduct', 'depson');
+                    } else if (selectedImageSrc === 'media/Judeline_-_Pareo.webp') {
+                        localStorage.setItem('selectedProduct', 'judeline');
+                    } else if (selectedImageSrc === 'media/Cariño_-_Camiseta.webp') {
+                        localStorage.setItem('selectedProduct', 'cariño');
+                    } else {
+                        return; 
+                    }
+
+                    window.location.href = 'product.html'; 
+                });     
             });
 
             // esto es para que al hacer hover en un item, el resto se baje la opacidad
@@ -434,20 +453,6 @@ $(document).ready(function () {
             itemsButton.addClass('disabled');
             $('.itemsUl').removeClass('show');
 
-        }
-    }
-
-
-    // para que el menu se abra por encima de las cosas con una altura
-    if ($(window).width() > 576) {
-        $('.my-header-btn').click(function() {
-            $('#header').css('height', '50%')
-            headerHeight();
-        });
-    }
-    function headerHeight() {
-        if ($('.btn.show').length === 0) {
-            $('#header').css('height', '9%');
         }
     }
 
@@ -564,19 +569,32 @@ $(document).ready(function () {
 
 
 
-    // Seleccionar todas las imágenes dentro de #gallery-main
+    // MENU
+    // para que se abra por encima de las cosas con una altura
+    if ($(window).width() > 576) {
+        $('.my-header-btn').click(function() {
+            $('#header').css('height', '50%')
+            headerHeight();
+        });
+    }
+    function headerHeight() {
+        if ($('.btn.show').length === 0) {
+            $('#header').css('height', '9%');
+        }
+    }
+
+
+
+    // PRODUCT PAGE FOTOS
+    // Carrusel pantalla completa al hacer click en una imagen de producto
     $("#gallery-main img").click(function(){
         var imagenSrc = $(this).attr("src");
 
-        // Obtener todas las imágenes dentro de #gallery-main
         var relatedImages = $("#gallery-main img").map(function(){
             return $(this).attr("src");
         }).get();
 
-        // Determinar el índice de la imagen actual
         var carouselIndex = relatedImages.indexOf(imagenSrc);
-
-        // Crear el HTML del carrusel
         var carouselHtml = `
             <div id='carousel'>
                 <img class='carousel-image' src='${imagenSrc}' />
@@ -585,14 +603,13 @@ $(document).ready(function () {
             </div>
         `;
         
-        // Añadir el carrusel al cuerpo del documento
         $("body").append(`
             <div id='imagenGrandeDiv' style='position:fixed;top:0;left:0;height:100%;width:100%;background:rgba(10,10,10,0.9);display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:10'>
                 ${carouselHtml}
             </div>
         `);
         
-        // Funcionalidad de los botones de flecha
+        // manejarlo con flechitas
         $('.carousel-arrow-right, .carousel-arrow-left').click(function(event) {
             event.stopPropagation();
             if ($(this).hasClass('carousel-arrow-right')) {
@@ -603,17 +620,17 @@ $(document).ready(function () {
             $('.carousel-image').attr('src', relatedImages[carouselIndex]);
         });
     
-        // Funcionalidad de las teclas del teclado
+        // manejarlo con teclado
         $(document).keydown(function(event) {
             if ($('#imagenGrandeDiv').length) {
                 switch (event.which) {
-                    case 37: // Tecla de flecha izquierda
+                    case 37: // flecha izquierda
                         carouselIndex = (carouselIndex - 1 + relatedImages.length) % relatedImages.length;
                         break;
-                    case 39: // Tecla de flecha derecha
+                    case 39: // flecha derecha
                         carouselIndex = (carouselIndex + 1) % relatedImages.length;
                         break;
-                    case 27: // Esc para cerrar
+                    case 27: // esc
                         $('#imagenGrandeDiv').remove();
                         return;
                 }
@@ -621,19 +638,18 @@ $(document).ready(function () {
             }
         });
         
-        // Cerrar el carrusel al hacer clic fuera del carrusel
         $("#imagenGrandeDiv").click(function(){
             $('#imagenGrandeDiv').remove();
         });
     
-        // Evitar que los clics en las flechas cierren el carrusel
         $(".carousel-arrow").click(function(event){
             event.stopPropagation();
         });
     });
     
 
-    // Al hacer clic en #product-bt-info
+
+    // +INFO
     $("#product-bt-info").click(function() {
         var productInfo = $("#product-info");
         var isVisible = productInfo.hasClass("visible");
@@ -668,8 +684,8 @@ $(document).ready(function () {
     });
 
 
-    // AÑADIR ELEMENTOS AL CARRITO
 
+    // AÑADIR ELEMENTOS AL CARRITO
     $(".add").click(function() {
         var badge = $(".btn-group .badge");
 
@@ -683,8 +699,8 @@ $(document).ready(function () {
     });
 
 
-    // ENLACE ENTRE PAGINAS
-    
+    // ENLACE ENTRE HTMLS
+    // ACTUALIZAR COSAS PRODUCT PAGE SEGÚN EL ELEMENTO QUE COJAS
     const productos = {
         depson: {
             images: [
@@ -727,8 +743,8 @@ $(document).ready(function () {
             ],
             title: "Judeline - Pareo",
             price: "25,00€",
-            desc: `Judeline's first merch - summer edition <br><br>
-            Pareo con temática marina para usar de diversas formas. <br><br>
+            desc: `Pareo con temática marina para usar de diversas formas[Judeline's first merch - summer edition] <br><br>
+            Judeline entiende tan bien el pop que es capaz de estirar sus límites, y sin duda tiene todas las cartas en su baza para ser la que lidere la actual generación. <br><br>
             Viste con estilo con el pareo gasa georgette oficial de Judeline este verano en tu playa favorita. <br><br>
             A complementar con el belly button piercing con el logo de Judeline, también disponible en la web.`,
             masinfo: `Composición: Gasa georgette con acabado en pespunte. <br><br>
@@ -746,12 +762,20 @@ $(document).ready(function () {
                 'media/product/Cariño_-_Camiseta_4.webp',
             ],
             title: "Cariño - Camiseta 'Cariño'",
-            price: "20,00€"
+            price: "20,00€",
+            desc: `Cariño: camiseta blanca <br>
+                    Álbum: Cariño <br><br>
+                    "Cariño" es un álbum de melodías pop que resulta poco menos que imposible de sacarse de la cabeza. Muestra gran descaro en las letras y una frescura y una actitud que desde siempre ha llamado la atención de todo el mundo. <br><br>
+                    Este diseño de camiseta apuesta por un estilo y2k llamativo y alegre para tías chulísimas. <br><br>
+                    Tallas disponibles: S, M, L, XL 
+                    `,
+            masinfo: `Material: algodón <br><br>
+                        Diseño: Nina Muro`,
         }
     };
 
     const productNames = Object.keys(productos);
-    let currentIndex = productNames.indexOf(localStorage.getItem('selectedProduct') || 'depson'); // Empezamos con el producto seleccionado o 'depson' si no hay nada en localStorage.
+    let currentIndex = productNames.indexOf(localStorage.getItem('selectedProduct') || 'depson'); 
 
     function loadProductImages() {
         const selectedProduct = productNames[currentIndex];
@@ -785,7 +809,8 @@ $(document).ready(function () {
     loadProductImages();
 
 
-    // responsive
+
+    // COSAS MOVIL
     if ($(window).width() < 576) {
 
         $('#header .btn-group').each(function() {
