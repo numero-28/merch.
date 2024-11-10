@@ -63,7 +63,7 @@
     color: var(--bs-gray-900);
     text-align: start;
     border: none;
-    font-family: var(--helve-normal);
+    font-family: var(--helve-bold);
 }
 
 .menubtn {
@@ -425,6 +425,8 @@ i img {
 
 .songs>div {
     display: flex;
+    justify-content: space-between;
+    column-gap: 5%;
 }
 
 #carousel {
@@ -531,7 +533,12 @@ i img {
 
     #product-info div.info-text {
         font-size: 0.9rem;
-        width: 90%;
+        width: 100%;
+    }
+
+    #product-info div.info-text>div>div {
+        font-size: 0.9rem;
+        width: 47%;
     }
 
 }
@@ -567,6 +574,26 @@ i img {
     .menubtn {
         display: block;
     }
+
+    #product-info {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 66vh;
+    }
+
+    #product-info.visible {
+        top: 34vh;
+    }
+
+    #product-info>div {
+        width: 100%;
+        height: auto;
+    }
+
+    #product-info div.info-title {
+    width: 100%;
+    }
+
     .mvl {
         height: 30vh;
         flex-wrap: wrap;
