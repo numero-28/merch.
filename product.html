@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-bs-theme="light">
     <head>
         <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1, user-scalable=no">
@@ -15,44 +15,53 @@
 
         <main id="product-main">
             <div id="header">
-            <button class="my-header-btn btn menubtn">menu</button>
-            <div class="col-3 btn-group">
-                <button class="btn btn-secondary my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
-                  artistas
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" data-artist="depresionsonora">depresión sonora</a></li>
-                  <li><a class="dropdown-item" data-artist="carolinadurante">carolina durante</a></li>
-                  <li><a class="dropdown-item" data-artist="laplata">la plata</a></li>
-                </ul>
+                <button class="my-header-btn btn menubtn">menu</button>
+                <div class="col-3 btn-group">
+                    <button class="btn btn-secondary my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                    artistas
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" data-artist="depresionsonora">depresión sonora</a></li>
+                    <li><a class="dropdown-item" data-artist="carolinadurante">carolina durante</a></li>
+                    <li><a class="dropdown-item" data-artist="laplata">la plata</a></li>
+                    </ul>
+                </div>
+                <div class="col-3 btn-group">
+                    <button class="btn btn-secondary my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                    categorías
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" data-categ="todo">todo</a></li>
+                    <li><a class="dropdown-item" data-categ="vinilos">vinilos</a></li>
+                    <li><a class="dropdown-item" data-categ="camis">camis</a></li>
+                    <li><a class="dropdown-item" data-categ="sudaderas">sudaderas</a></li>
+                    </ul>
+                </div>
+                <div class="col-3 btn-group">
+                    <button class="btn btn-secondary my-header-btn items disabled" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true" data-bs-auto-close="false">
+                    items
+                    </button>
+                    <ul class="dropdown-menu itemsUl" aria-labelledby="dropdownMenuButton" data-popper-placement="bottom-start"></ul>
+                </div>
+                <div class="col-1 col-xl-1 btn-group">
+                </div>
+                <div class="col-1 col-xl-1 btn-group darkmode">
+                <li class="nav-item">
+                    <div class="form-check form-switch d-flex align-items-center">
+                        <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch">
+                    </div>
+                </li>
+                </div>
+                <div class="col-1 col-xl-1 btn-group">
+                    <button type="button" class="btn btn-secondary my-header-btn">
+                        carro
+                        <span class="none position-absolute top-0 translate-middle badge rounded-1 bg-danger">
+                        1
+                        <span class="visually-hidden">products buying</span>
+                        </span>
+                    </button>
+                </div>
             </div>
-            <div class="col-3 btn-group">
-                <button class="btn btn-secondary my-header-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
-                  categorías
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" data-categ="todo">todo</a></li>
-                  <li><a class="dropdown-item" data-categ="vinilos">vinilos</a></li>
-                  <li><a class="dropdown-item" data-categ="camis">camis</a></li>
-                  <li><a class="dropdown-item" data-categ="sudaderas">sudaderas</a></li>
-                </ul>
-            </div>
-            <div class="col-3 btn-group">
-                <button class="btn btn-secondary my-header-btn items disabled" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true" data-bs-auto-close="false">
-                  items
-                </button>
-                <ul class="dropdown-menu itemsUl" aria-labelledby="dropdownMenuButton" data-popper-placement="bottom-start"></ul>
-            </div>
-            <div class="col-1 col-xl-1 btn-group">
-                <button type="button" class="btn btn-secondary my-header-btn">
-                    carro
-                    <span class="none position-absolute top-0 translate-middle badge rounded-1 bg-danger">
-                      1
-                      <span class="visually-hidden">products buying</span>
-                    </span>
-                  </button>
-            </div>
-          </div>
             <div id="gallery-main" class="col-xl-11 col-12 ">
                 <div class="col-xl-4 col-12">
                     <img src="media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_1.webp" alt="">
