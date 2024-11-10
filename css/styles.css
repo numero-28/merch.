@@ -35,10 +35,6 @@
     src: url(../css/fonts/HelveticaNeueLTStd-Roman.otf);
 }
 
-@include color-mode(dark) {
-}
-
-
 :root {
     --helve-bold: 'helve bold';
     --helve-thin: 'helve thin';
@@ -67,7 +63,7 @@
 }
 .nav-item {
     display: block;
-    padding: 0.375rem 0;
+    padding: 0.2rem 0;
 }
 .nav-item input {
     border: solid var(--bs-white) 1px;
