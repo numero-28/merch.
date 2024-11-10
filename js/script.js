@@ -84,6 +84,8 @@ $(document).ready(function () {
             'media/Makinavaja_-_EP.webp',
             'media/Makinavaja_-_Camiseta_Manga_Larga.webp',
             'media/Depresión_Sonora_USA_Tour_-_Camiseta_.webp',
+            'media/Depresión_Sonora_-_Zippo.webp',
+
         ],
         carolinadurante: [
             'media/Elige_Tu_Propia_Aventura_-_LP.webp',
@@ -91,9 +93,12 @@ $(document).ready(function () {
             'media/Cuatro_Chavales_-_LP.webp',
             'media/Carolina_Durante_-_LP.webp',
             'media/Elige_Tu_Propia_Aventura_-_Camiseta.webp',
+            'media/Carolina_Durante_-_Pin.webp',
+
         ],
         judeline: [
             'media/Judeline_-_Pareo.webp',
+            'media/Judeline_-_Belly_Button_Piercing.webp',
             'media/D.B.C.A._-_Camiseta.webp',
             'media/Bodhiria_-_LP.jpg',
             'media/Niña_del_Sur_-_Camiseta.webp',
@@ -115,18 +120,39 @@ $(document).ready(function () {
             'media/Sueños_-_LP.webp',
         ],
         camellos: [
-            'media/Camellos_-_Camiseta.jpg',
             'media/Calle_Para_Siempre_-_LP.jpg',
             'media/Gran_Hostal_-_LP.jpg',
             'media/Manual_de_Estilo_-_LP.jpg',
             'media/Peligrosamente_-_Camiseta.jpg',
+            'media/Camellos_-_Camiseta.jpg',
         ],
         corte: [
             'media/Corte!_-_EP.webp',
         ],
         mujeres: [
             'media/Aquellos_Ojos_-_Single.webp',
-            'media/No_Volveré_-_Single.webp'
+            'media/No_Volveré_-_Single.webp',
+            'media/Trance_Continuo_-_LP.webp',
+            'media/Un_Sentimiento_Importante_-_LP.webp',
+            'media/Rock_y_Amistad_-_EP.webp',
+        ],
+        lospunsetes: [
+            'media/AFDTRQHOT_-_Camiseta.webp',
+            'media/AFDTRQHOT_-_LP.webp',
+            'media/AFDTRQHOT_-_Sudadera.webp',
+            'media/Los_Punsetes_-_Camiseta.webp',
+            'media/Madrid_me_ataca_-_EP.webp',
+            'media/QLDPCATA_-_Camiseta.webp',
+            'media/Que_le_den_por_culo_a_tus_amigos_-_LP.webp',
+        ],
+        natalialacunza: [
+            'media/Natalia_Lacunza_-_Camiseta.webp',
+            'media/Tribal_Duro_-_Baby_Tee.webp',
+            'media/Tiene_Que_Ser_Para_Mi_-_LP.jpg',
+            'media/Duro_-_Sudadera.webp',
+            'media/Otras_Alas_-_LP.jpg',
+            'media/Duro_-_Gorra.webp',
+
         ]
     };
 
@@ -141,15 +167,65 @@ $(document).ready(function () {
             'media/Cariño_-_LP.webp',
             'media/Bodhiria_-_LP.jpg',
             'media/Corte!_-_EP.webp',
+            'media/Tiene_Que_Ser_Para_Mi_-_LP.jpg',
+            'media/AFDTRQHOT_-_LP.webp',
+            'media/Que_le_den_por_culo_a_tus_amigos_-_LP.webp',
+            'media/Aquellos_Ojos_-_Single.webp',
+            'media/No_Volveré_-_Single.webp',
+            'media/Trance_Continuo_-_LP.webp',
+            'media/Sueños_-_LP.webp',
+            'media/Calle_Para_Siempre_-_LP.jpg',
+            'media/Gran_Hostal_-_LP.jpg',
+        ],
+        cds: [
+            'media/Makinavaja_-_EP.webp',
+            'media/Elige_Tu_Propia_Aventura_-_LP.webp',
+            'media/Un_Sentimiento_Importante_-_LP.webp',
+            'media/Tanto_Por_Hacer_-_LP.webp',
+            'media/Rock_y_Amistad_-_EP.webp',
+            'media/Otras_Alas_-_LP.jpg',
+            'media/Madrid_me_ataca_-_EP.webp',
+            'media/Manual_de_Estilo_-_LP.jpg',
+            'media/Tiene_Que_Ser_Para_Mi_-_LP.jpg',
+            'media/Bodhiria_-_LP.jpg',
+            'media/Que_le_den_por_culo_a_tus_amigos_-_LP.webp',
+
         ],
         camis: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
             'media/Makinavaja_-_Camiseta_Manga_Larga.webp',
             'media/Hamburguesas_-_Camiseta.webp',
             'media/Elige_Tu_Propia_Aventura_-_Camiseta.webp',
+            'media/Natalia_Lacunza_-_Camiseta.webp',
+            'media/Tribal_Duro_-_Baby_Tee.webp',
+            'media/QLDPCATA_-_Camiseta.webp',
+            'media/Los_Punsetes_-_Camiseta.webp',
+            'media/AFDTRQHOT_-_Camiseta.webp',
+            'media/Peligrosamente_-_Camiseta.jpg',
+            'media/Camellos_-_Camiseta.jpg',
+            'media/Tanto_Por_Hacer_-_Camiseta_Azul.webp',
+            'media/Tanto_Por_Hacer_-_Camiseta_Marrón.webp',
+            'media/Cariño_-_Camiseta.webp',
+            'media/Fuck_Marry_Kill_-_Camiseta.webp',
+            'media/Niña_del_Sur_-_Camiseta.webp',
+            'media/D.B.C.A._-_Camiseta.webp',
         ],
         sudaderas: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
+            'media/Duro_-_Sudadera.webp',
+            'media/AFDTRQHOT_-_Sudadera.webp',
+            'media/Tanto_Por_Hacer_-_Sudadera_Gris.webp',
+            'media/Cariño_-_Sudadera.webp',
+            'media/Fuck_Marry_Kill_-_Sudadera.webp',
+            'media/Judeline_-_Sudadera.webp',
+            'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
+        ],
+        otros: [
+            'media/Judeline_-_Pareo.webp',
+            'media/Judeline_-_Belly_Button_Piercing.webp',
+            'media/Carolina_Durante_-_Pin.webp',
+            'media/Duro_-_Gorra.webp',
+            'media/Depresión_Sonora_-_Zippo.webp',
         ]
     };
 
@@ -453,12 +529,12 @@ $(document).ready(function () {
     crsl.on('wheel', function(e) {
         e.preventDefault();
         const delta = e.originalEvent.deltaY; 
-        const scrollAmount = 90;
+        const scrollAmount = 120;
 
         gsap.to('#home-crsl', {
             scrollLeft: '+=' + (delta > 0 ? scrollAmount : -scrollAmount), 
             ease: "power1.out",
-            duration: 0.8
+            duration: 0.5
         });
     });
 
