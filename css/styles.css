@@ -12,14 +12,12 @@
     display: none;
 }
 
-*:hover:not(body, #themeSwitch),
-*:focus:not(body, #themeSwitch),
-*:active:not(body, #themeSwitch),
-*:focus-visible:not(body, #themeSwitch),
-*:checked:not(body, #themeSwitch) {
+*:hover:not(#themeSwitch),
+*:focus:not(#themeSwitch),
+*:active:not(#themeSwitch),
+*:focus-visible:not(#themeSwitch),
+*:checked:not(#themeSwitch) {
     border: none;
-    background-color: transparent;
-    background: transparent;
 }
 
 @font-face {
@@ -37,8 +35,6 @@
     src: url(../css/fonts/HelveticaNeueLTStd-Roman.otf);
 }
 
-@include color-mode(dark) {
-}
 
 
 :root {
@@ -328,6 +324,11 @@
     font-family:  var(--helve-bold);
     cursor: pointer;
 }
+
+#bthome>i>img {
+    filter: invert(1);
+}
+
 #bthome {
     text-decoration: none;
     color: var(--bs-gray-900);
@@ -405,6 +406,7 @@ i img {
 .carousel-image {
     width: auto;
     height: 100%;
+    max-width: 100%;
 }
 
 .carousel-arrow-left {
