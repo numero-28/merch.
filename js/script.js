@@ -281,8 +281,21 @@ $(document).ready(function () {
 
 
     // CARRUSEL DE IMÁGENES HOME
+    var selectedProduct = localStorage.getItem('selectedProduct');
     let selectedArtist = null;
-    let selectedCateg;
+    let selectedCateg = null;
+
+    if (selectedProduct === 'depson') {
+        selectedArtist = 'depresionsonora';
+        selectedCateg = 'vinilos';
+    } else if (selectedProduct === 'judeline') {
+        selectedArtist = 'judeline';
+        selectedCateg = 'otros';
+    } else if (selectedProduct === 'cariño') {
+        selectedArtist = 'cariño';
+        selectedCateg = 'camis';
+    }
+
     if ($(window).width() < 576) {
         selectedCateg = 'todo';
     } else {
@@ -550,12 +563,14 @@ $(document).ready(function () {
     let touchScrollLeft;
 
     crsl.on('touchstart', function (e) {
+        console.log('smuve');
         isSwiping = true;
         startTouchX = e.originalEvent.touches[0].pageX - crsl.offset().left;
         touchScrollLeft = crsl.scrollLeft();
     });
 
     crsl.on('touchmove', function (e) {
+        
         if (!isSwiping) return;
         e.preventDefault();
         const x = e.originalEvent.touches[0].pageX - crsl.offset().left;
@@ -571,9 +586,9 @@ $(document).ready(function () {
 
     // MENU
     // para que se abra por encima de las cosas con una altura
-    if ($(window).width() > 576) {
+    if ($(window).width() > 576 && currentPage === 'index.html') {
         $('.my-header-btn').click(function() {
-            $('#header').css('height', '50%')
+            $('#header').css('height', '52%')
             headerHeight();
         });
     }
@@ -581,6 +596,40 @@ $(document).ready(function () {
         if ($('.btn.show').length === 0) {
             $('#header').css('height', '9%');
         }
+    }
+
+    var currentPage = window.location.pathname.split('/').pop();
+    if (currentPage === 'product.html') {
+        $('.my-header-btn').click(function() {
+            var headerHeight = $('#header').height();
+            console.log('hhe is' + headerHeight);
+            
+            if(headerHeight < '50') {
+                $('#header').css('height', '52%');
+                $('.dropdown-menu').addClass('show');
+                $('.dropdown-menu').css({
+                    'position': 'absolute',
+                    'inset': '0px auto auto 0px',
+                    'margin': '0px',
+                    'transform': 'translate3d(0px, 35px, 0px)'
+                });
+            } else if (headerHeight > '50') {
+                $('#header').css('height', '9%');
+                    $('.dropdown-menu').removeClass('show');
+                $('.dropdown-menu').css({
+                    'position': '',
+                    'inset': '',
+                    'margin': '',
+                    'transform': ''
+                });
+            }
+        });
+
+        $('.dropdown-menu a[data-artist="' + selectedArtist + '"]').addClass('selected').attr('aria-selected', 'true');
+        $('.dropdown-menu a[data-categ="' + selectedCateg + '"]').addClass('selected').attr('aria-selected', 'true');
+
+        
+        updateCarousel();
     }
 
 
