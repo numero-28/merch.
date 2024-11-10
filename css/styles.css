@@ -35,9 +35,6 @@
     src: url(../css/fonts/HelveticaNeueLTStd-Roman.otf);
 }
 
-@include color-mode(dark) {
-}
-
 
 :root {
     --helve-bold: 'helve bold';
