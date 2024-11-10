@@ -635,8 +635,18 @@ $(document).ready(function () {
             title: "Judeline - Pareo",
             price: "25,00€"
         },
-        cariño: [
-        ]
+        cariño: {
+            images: [
+                'media/product/Cariño_-_Camiseta.webp',
+                'media/product/Cariño_-_Camiseta_3.jpg',
+                'media/product/Cariño_-_Camiseta_2.jpg',
+                'media/product/Cariño_-_Camiseta_5.webp',
+                'media/product/Cariño_-_Camiseta_6.webp',
+                'media/product/Cariño_-_Camiseta_4.webp',
+            ],
+            title: "Cariño - Camiseta 'Cariño'",
+            price: "20,00€"
+        }
     };
 
     const productNames = Object.keys(productos);
