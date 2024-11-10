@@ -699,38 +699,50 @@ $(document).ready(function () {
 
 
     // +INFO
-    $("#product-bt-info").click(function() {
-        var productInfo = $("#product-info");
-        var isVisible = productInfo.hasClass("visible");
-
-        productInfo.toggleClass("visible");
-
-        var isMobile = window.innerWidth <= 768;
-
-        if (!isVisible) {
-            if (isMobile) {
-                $("#product-box").css("top", "23%");      
-                $("#gallery-main").css("top", "-32%");    
-                $("#header").css("top", "-40%");          
+        $("#product-bt-info").click(function() {
+            var productInfo = $("#product-info");
+            var isVisible = productInfo.hasClass("visible");
+    
+            // Alternar la clase 'visible' en #product-info
+            productInfo.toggleClass("visible");
+    
+            // Detectar si es una pantalla móvil
+            var isMobile = window.innerWidth <= 768;
+    
+            // Ajustar las posiciones de las otras secciones según el tamaño de pantalla
+            if (!isVisible) {
+                if (isMobile) {
+                    // Configuración para pantallas móviles (altura de #product-info es 66vh)
+                    $("#product-box").css("top", "calc(63vh - 66vh)");       // Ajusta el desplazamiento
+                    $("#gallery-main").css("top", "calc(9vh - 66vh)");       // Ajusta el desplazamiento
+                    $("#header").css("top", "calc(0vh - 66vh)");             // Ajusta el desplazamiento
+                } else {
+                    // Configuración para pantallas grandes (altura de #product-info es 40vh)
+                    $("#product-box").css("top", "calc(54vh - 40vh)");       // Ajusta el desplazamiento
+                    $("#gallery-main").css("top", "calc(9vh - 40vh)");       // Ajusta el desplazamiento
+                    $("#header").css("top", "calc(0vh - 40vh)");             // Ajusta el desplazamiento
+                }
+                $("#product-bt-info div:first-child").text("- info"); // Cambiar el texto a "-"
             } else {
-                $("#product-box").css("top", "14%");    
-                $("#gallery-main").css("top", "-31%");     
-                $("#header").css("top", "-40%");           
+                // Restaurar las posiciones de las otras secciones al ocultar #product-info
+                if (isMobile) {
+                    $("#product-box").css("top", "63vh");       // Posición original para móvil
+                    $("#gallery-main").css("top", "9vh");       // Posición original para móvil
+                    $("#header").css("top", "0");               // Posición original para móvil
+                } else {
+                    $("#product-box").css("top", "54vh");       // Posición original para escritorio
+                    $("#gallery-main").css("top", "9vh");       // Posición original para escritorio
+                    $("#header").css("top", "0");               // Posición original para escritorio
+                }
+                $("#product-bt-info div:first-child").text("+ info"); // Cambiar el texto a "+"
             }
-            $("#product-bt-info div:first-child").text("- info"); 
-        } else {
-            if (isMobile) {
-                $("#product-box").css("top", "63%");      
-                $("#gallery-main").css("top", "9%");      
-                $("#header").css("top", "0");             
-            } else {
-                $("#product-box").css("top", "54%");     
-                $("#gallery-main").css("top", "9%");     
-                $("#header").css("top", "0");            
-            }
-            $("#product-bt-info div:first-child").text("+ info"); 
-        }
-    });
+        });
+
+    
+
+    
+    
+    
 
 
 
