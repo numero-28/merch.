@@ -131,6 +131,10 @@
     justify-content: flex-end;
 }
 
+#dmMvl {
+    display: none;
+}
+
 .nav-item::marker {
     color: transparent;
 }
@@ -562,6 +566,30 @@ i img {
     }
     .menubtn {
         display: block;
+    }
+    .mvl {
+        height: 30vh;
+        flex-wrap: wrap;
+        flex-direction: column;
+        column-gap: 2rem;
+    }
+    .mvl2 {
+        height: 15vh;
+        flex-wrap: wrap;
+        flex-direction: column;
+        column-gap: 2rem;
+    }
+    .mvl3 {
+        margin-top: 16vh;
+    }
+    #dmMvl {
+        display: block;
+        position: fixed;
+        top: 2%;
+        right: 0;
+    }
+    .nav-item {
+        display: none;
     }
 }
 

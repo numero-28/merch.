@@ -377,9 +377,7 @@ $(document).ready(function () {
                         return;
                     }
                     window.location.href = 'product.html';
-                    if (window.location.pathname.includes('index.html')) {
-                        localStorage.removeItem('selectedProduct');
-                    }
+                    
                 }
             });
 
@@ -416,7 +414,7 @@ $(document).ready(function () {
                 itemsMenu.append(menuItem);
                 menuItem.attr('data-image', imageUrl);  
 
-                 menuItem.click(function() {
+                menuItem.click(function() {
                     const selectedImageSrc = $(this).attr('data-image'); 
 
                     if (selectedImageSrc === 'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp') {
@@ -811,7 +809,7 @@ $(document).ready(function () {
     };
 
     const productNames = Object.keys(productos);
-    let currentIndex = productNames.indexOf(localStorage.getItem('selectedProduct') || 'depson'); 
+    let currentIndex = productNames.indexOf(localStorage.getItem('selectedProduct')); 
 
     function loadProductImages() {
         const selectedProduct = productNames[currentIndex];
@@ -870,23 +868,33 @@ $(document).ready(function () {
     // COSAS MOVIL
     if ($(window).width() < 576) {
 
-        $('#header .btn-group').each(function() {
+        $('#header #mvl').each(function() {
             $(this).on('click', function() {
                 const btn = $(this).find('button');
                 const dropMenu = $(this).find('.dropdown-menu');
-                const dropHeight = btn.outerHeight() + dropMenu.outerHeight();
-                
+                const dropHeight = dropMenu.outerHeight();
+                $('#header .btn-group').not(this).css('margin-bottom', '0');
                 if ($(this).css('margin-bottom') === '0px') {
-                    $(this).css({
-                        'margin-bottom': (dropHeight) + 'px' 
-                    });
+                    $(this).css('margin-bottom', dropHeight + 'px');
                 } else {
-                    $(this).css({
-                        'margin-bottom': '0' 
-                    });
+                    $(this).css('margin-bottom', '0');
                 }
-            });
+                    });
+                });
+
+                var currentPage = window.location.pathname.split('/').pop();
+                if (currentPage === 'product.html') {
+                    $('.btn-group').css('margin-bottom', '60%');
+                }
+
+        $('#mvl').click(function() {
+            $('.mvl').css('display', 'flex');
         });
+        $('#mvl2').click(function() {
+            $('.mvl2').css('display', 'flex');
+        });
+
+        
 
     }
 
@@ -894,11 +902,21 @@ $(document).ready(function () {
         if ($(this).text() === 'menu') {
             $('#header .btn-group').css('display', 'block');
             $('#header').css('height', '100%')
+            var currentPage = window.location.pathname.split('/').pop();
+            if (currentPage === 'product.html') {
+                $('.mvl').css('display', 'flex');
+                $('.mvl2').css('display', 'flex');
+            }
             $(this).text('cerrar');
         } else if(($(this).text() === 'cerrar')){
             $('#header .btn-group').css('display', 'none');
             $(this).text('menu');
             $('#header').css('height', '9%')
+            var currentPage = window.location.pathname.split('/').pop();
+            if (currentPage === 'product.html') {
+                $('.mvl').css('display', 'none');
+                $('.mvl2').css('display', 'none');
+            }
         }
     })
 });
