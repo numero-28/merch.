@@ -12,71 +12,74 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 
-// las movidas de bootstrap para el dark mode pero modificado
-// para que sea con un switch y para que cambie bien los colores
-(() => {
-    'use strict'
 
-    const getStoredTheme = () => localStorage.getItem('theme');
-    const setStoredTheme = theme => localStorage.setItem('theme', theme);
-
-    const getPreferredTheme = () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme) {
-        return storedTheme;
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    const setTheme = theme => {
-        document.documentElement.setAttribute('data-bs-theme', theme);
-    };
-
-    const applySwitchState = theme => {
-      document.getElementById('themeSwitch').checked = theme === 'dark';
-    };
-
-    // Set initial theme on load
-    setTheme(getPreferredTheme());
-    applySwitchState(getPreferredTheme());
-
-    // Listen for theme change on switch
-    document.getElementById('themeSwitch').addEventListener('change', function() {
-        const theme = this.checked ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-bs-theme', theme);
-    
-        if (theme === 'dark') {
-        document.documentElement.style.setProperty('--bs-gray-900', '--bs-white'); 
-        document.documentElement.style.setProperty('--bs-white', '--bs-gray-900'); 
-        } 
-    });
-
-    // Listen for OS-level theme changes when theme is set to auto
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme !== 'light' && storedTheme !== 'dark') {
-        setTheme(getPreferredTheme());
-        applySwitchState(getPreferredTheme());
-      }
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      applySwitchState(getPreferredTheme());
-    });
-  })();
 
 $(document).ready(function () {
 
+    // las movidas de bootstrap para el dark mode pero modificado
+    // para que sea con un switch y para que cambie bien los colores
+    (() => {
+        'use strict'
+
+        const getStoredTheme = () => localStorage.getItem('theme');
+
+        const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme();
+        if (storedTheme) {
+            return storedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+
+        const setTheme = theme => {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        };
+
+        const applySwitchState = theme => {
+        document.getElementById('themeSwitch').checked = theme === 'dark';
+        };
+
+        setTheme(getPreferredTheme());
+        applySwitchState(getPreferredTheme());
+
+        document.getElementById('themeSwitch').addEventListener('change', function() {
+            const theme = this.checked ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        
+            if (theme === 'dark') {
+                document.documentElement.style.setProperty('--bs-gray-900', '#fff'); 
+                document.documentElement.style.setProperty('--bs-white', '#212529'); 
+                document.documentElement.style.setProperty('--bs-gray-400', '#0f0f0f'); 
+            } else {
+                document.documentElement.style.setProperty('--bs-gray-900', '#212529'); 
+                document.documentElement.style.setProperty('--bs-white', '#fff'); 
+                document.documentElement.style.setProperty('--bs-gray-400', '#ced4da'); 
+            }
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const storedTheme = getStoredTheme();
+        if (storedTheme !== 'light' && storedTheme !== 'dark') {
+            setTheme(getPreferredTheme());
+            applySwitchState(getPreferredTheme());
+        }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+        applySwitchState(getPreferredTheme());
+        });
+    })();
     
 
     // arrays de artistas y de categorias
     const artists = {
         depresionsonora: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp',
+            'media/Judeline_-_Pareo.webp',
             'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
             'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
             'media/Makinavaja_-_EP.webp',
-            'media/Makinavaja_-_Camiseta.webp',
+            'media/Makinavaja_-_Camiseta_Manga_Larga.webp',
 
         ],
         carolinadurante: [
@@ -98,7 +101,7 @@ $(document).ready(function () {
         ],
         camis: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
-            'media/Makinavaja_-_Camiseta.webp',
+            'media/Makinavaja_-_Camiseta_Manga_Larga.webp',
             'media/Hamburguesas_-_Camiseta.webp',
             'media/Elige_Tu_Propia_Aventura_-_Camiseta.webp',
         ],
@@ -106,6 +109,8 @@ $(document).ready(function () {
             'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
         ]
     };
+
+
     
     // PRELANDING HOME
     // un array que recopile todas las imagenes de la web
@@ -233,13 +238,23 @@ $(document).ready(function () {
             }
         }
 
-
+        
         // y aquí te crea tantas imagenes como elementos tenga que mostrar dependiendo de los inputs
         imagesToShow.forEach(function (imageSrc) {
             const imageDiv = $('<div class="col-xl-3 col-6 crslitems"></div>');
             const imageElement = $('<img>', {
                 src: imageSrc,
                 alt: '',
+                click: function() {
+                    console.log('hola');
+                    if (imageSrc === 'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp') {
+                        localStorage.setItem('selectedProduct', 'depson');
+                        
+                    } else if (imageSrc === 'media/Judeline_-_Pareo.webp') {
+                        localStorage.setItem('selectedProduct', 'judeline');
+                    }
+                    window.location.href = 'product.html';
+                }
             });
 
             imageDiv.append(imageElement);
@@ -250,6 +265,8 @@ $(document).ready(function () {
         });
         updateItemsDropdown();
     }
+
+   
 
     // el dropdown de items solo se muestra cuando has seleccionado artista y categoria (que no sea 'todos')
     // coge la url de las imagenes que se estan mostrando y muestra los nombres sin el webp y transformando las _ en espacios
@@ -544,41 +561,83 @@ $(document).ready(function () {
         }
     });
 
-});
+    // El_Arte_De_Morir_Muy_Despacio_-_LP
+        const selectedProduct = localStorage.getItem('selectedProduct');
+        console.log(selectedProduct);
+        
+        const productos = {
+            depson: [
+                'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo.webp',
+                'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_6.webp',
+                'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_3.webp',
+                'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_4.webp',
+                'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_2.webp',
+                'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_5.webp',
+            ],
+            judeline: [
+                'media/product/Judeline_-_Pareo.webp',
+                'media/product/Judeline_Pareo_2.jpeg',
+                'media/product/Judeline_Pareo_3.webp',
+                'media/product/Judeline_Pareo_4.jpg',
+                'media/product/Judeline_Pareo_5.jpg',
+                'media/product/Judeline_Pareo_6.jpg',
+            ],
+            cariño: [
+                // Agrega las imágenes aquí si es necesario
+            ]
+        };
 
-
-
-// responsive
-if ($(window).width() < 576) {
-
-    $('#header .btn-group').each(function() {
-        $(this).on('click', function() {
-            const btn = $(this).find('button');
-            const dropMenu = $(this).find('.dropdown-menu');
-            const dropHeight = btn.outerHeight() + dropMenu.outerHeight();
+        if (selectedProduct && productos[selectedProduct]) {
             
-            if ($(this).css('margin-bottom') === '0px') {
-                $(this).css({
-                    'margin-bottom': (dropHeight) + 'px' 
-                });
-            } else {
-                $(this).css({
-                    'margin-bottom': '0' 
-                });
-            }
+            const images = productos[selectedProduct];
+            const galleryMain = document.getElementById('gallery-main');
+            const productGallery = document.getElementById('product-gallery');
+
+            // Configura la imagen principal
+            galleryMain.querySelector('img').src = images[0];
+
+            // Configura las imágenes de la galería secundaria
+            productGallery.querySelectorAll('img').forEach((img, index) => {
+                img.src = images[index + 1] || ''; // Usa una imagen vacía si no hay más en el array
+            });
+
+            // Borra el item del almacenamiento local
+            localStorage.removeItem('selectedProduct');
+        } 
+
+
+    // responsive
+    if ($(window).width() < 576) {
+
+        $('#header .btn-group').each(function() {
+            $(this).on('click', function() {
+                const btn = $(this).find('button');
+                const dropMenu = $(this).find('.dropdown-menu');
+                const dropHeight = btn.outerHeight() + dropMenu.outerHeight();
+                
+                if ($(this).css('margin-bottom') === '0px') {
+                    $(this).css({
+                        'margin-bottom': (dropHeight) + 'px' 
+                    });
+                } else {
+                    $(this).css({
+                        'margin-bottom': '0' 
+                    });
+                }
+            });
         });
-    });
 
-}
-
-$('.menubtn').click(function() {
-    if ($(this).text() === 'menu') {
-        $('#header .btn-group').css('display', 'block');
-        $('#header').css('height', '100%')
-        $(this).text('cerrar');
-    } else if(($(this).text() === 'cerrar')){
-        $('#header .btn-group').css('display', 'none');
-        $(this).text('menu');
-        $('#header').css('height', '9%')
     }
-})
+
+    $('.menubtn').click(function() {
+        if ($(this).text() === 'menu') {
+            $('#header .btn-group').css('display', 'block');
+            $('#header').css('height', '100%')
+            $(this).text('cerrar');
+        } else if(($(this).text() === 'cerrar')){
+            $('#header .btn-group').css('display', 'none');
+            $(this).text('menu');
+            $('#header').css('height', '9%')
+        }
+    })
+});

@@ -12,14 +12,12 @@
     display: none;
 }
 
-*:hover:not(body, #themeSwitch),
-*:focus:not(body, #themeSwitch),
-*:active:not(body, #themeSwitch),
-*:focus-visible:not(body, #themeSwitch),
-*:checked:not(body, #themeSwitch) {
+*:hover:not(#themeSwitch),
+*:focus:not(#themeSwitch),
+*:active:not(#themeSwitch),
+*:focus-visible:not(#themeSwitch),
+*:checked:not(#themeSwitch) {
     border: none;
-    background-color: transparent;
-    background: transparent;
 }
 
 @font-face {
@@ -35,9 +33,6 @@
 @font-face {
     font-family: 'helve normal';
     src: url(../css/fonts/HelveticaNeueLTStd-Roman.otf);
-}
-
-@include color-mode(dark) {
 }
 
 
@@ -58,7 +53,7 @@
     padding: 1rem;
     height: 9%;
     background-color: var(--bs-white);
-    opacity: 80%;
+    opacity: 85%;
     transition: height .6s cubic-bezier(0.19, 1, 0.22, 1), top 0.5s ease;
 }
 .darkmode {
@@ -182,7 +177,6 @@
 #home-crsl img {
     width: 85%;
     object-fit: cover;
-    pointer-events: none;
     transition: opacity .3s ease-in-out;
 }
 #home-crsl .col-6 {
@@ -349,7 +343,7 @@ i img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: #e9e9e9;
+    background-color: var(--bs-gray-400);
     color: var(--bs-gray-900);
     justify-content: space-between;
     padding: 10px;
