@@ -580,7 +580,24 @@ $(document).ready(function () {
                 'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_5.webp',
             ],
             title: "Depresión Sonora – El Arte de Morir Muy Despacio (Edición Deluxe)",
-            price: "38,00€"
+            price: "38,00€",
+            desc: `<div>
+                        <div>A1 Parte I: Introducción a la Entropía.<br>
+                            A2 Bienvenido al Caos.<br>
+                            A3 Veo tan Dentro.<br>
+                            A4 Dos Adolescentes y su Primer Amor.<br>
+                            A5 Parte II: La Abrazo con Fuerza (Carta a la Soledad).<br>
+                            A6 Te Mientes a ti mismo para Ser Feliz.
+                        </div>
+                        <div>B1 Voy a Explotar.<br>
+                            B2 Parte III: Muerte y Resurrección.<br>
+                            B3 Fumando en mi Funeral.<br>
+                            B4 Dónde Están mis Amigos.<br>
+                            B5 Como todo el Mundo.
+                        </div>
+                    </div>`,
+            masinfo: `“El arte de morir muy despacio” se puede entender como el reverso nihilista y sarcástico de esos manuales de auto-ayuda a los que Marcos y los de su edad han sido sobreexpuestos.<br><br>
+            3x Vinilo 7″ color | Edición limitada 300 unidades`
         },
             
         judeline: {
@@ -593,7 +610,15 @@ $(document).ready(function () {
                 'media/product/Judeline_Pareo_6.jpg'
             ],
             title: "Judeline - Pareo",
-            price: "25,00€"
+            price: "25,00€",
+            desc: `Judeline's first merch - summer edition <br><br>
+            Pareo con temática marina para usar de diversas formas. <br><br>
+            Viste con estilo con el pareo gasa georgette oficial de Judeline este verano en tu playa favorita. <br><br>
+            A complementar con el belly button piercing con el logo de Judeline, también disponible en la web.`,
+            masinfo: `Composición: Gasa georgette con acabado en pespunte. <br><br>
+            Dimensiones: 70×145 cm <br><br>
+            Diseñado por: Marta Ochoa <br><br>
+            `
         },
         cariño: [
         ]
@@ -614,6 +639,8 @@ $(document).ready(function () {
 
         $('#product-text .title').text(productData.title);
         $('#product-text .sub').text(productData.price);
+        $('#product-info .songs').html(productData.desc);
+        $('#product-info .masinfo').html(productData.masinfo);
 
         localStorage.setItem('selectedProduct', selectedProduct);
 
