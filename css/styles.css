@@ -12,11 +12,11 @@
     display: none;
 }
 
-*:hover:not(#themeSwitch),
-*:focus:not(#themeSwitch),
-*:active:not(#themeSwitch),
-*:focus-visible:not(#themeSwitch),
-*:checked:not(#themeSwitch) {
+*:hover:not(body, #themeSwitch),
+*:focus:not(body, #themeSwitch),
+*:active:not(body, #themeSwitch),
+*:focus-visible:not(body, #themeSwitch),
+*:checked:not(body, #themeSwitch) {
     border: none;
 }
 
@@ -33,6 +33,9 @@
 @font-face {
     font-family: 'helve normal';
     src: url(../css/fonts/HelveticaNeueLTStd-Roman.otf);
+}
+
+@include color-mode(dark) {
 }
 
 
@@ -322,6 +325,11 @@
     font-family:  var(--helve-bold);
     cursor: pointer;
 }
+
+#bthome>i>img {
+    filter: invert(1);
+}
+
 #bthome {
     text-decoration: none;
     color: var(--bs-gray-900);
@@ -399,6 +407,7 @@ i img {
 .carousel-image {
     width: auto;
     height: 100%;
+    max-width: 100%;
 }
 
 .carousel-arrow-left {
