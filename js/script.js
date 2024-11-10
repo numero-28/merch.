@@ -11,6 +11,9 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+
+// las movidas de bootstrap para el dark mode pero modificado
+// para que sea con un switch y para que cambie bien los colores
 (() => {
     'use strict'
 
@@ -26,11 +29,7 @@ requestAnimationFrame(raf);
     };
 
     const setTheme = theme => {
-      if (theme === 'auto') {
-        document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      } else {
         document.documentElement.setAttribute('data-bs-theme', theme);
-      }
     };
 
     const applySwitchState = theme => {
@@ -43,9 +42,13 @@ requestAnimationFrame(raf);
 
     // Listen for theme change on switch
     document.getElementById('themeSwitch').addEventListener('change', function() {
-      const theme = this.checked ? 'dark' : 'light';
-      setStoredTheme(theme);
-      setTheme(theme);
+        const theme = this.checked ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-bs-theme', theme);
+    
+        if (theme === 'dark') {
+        document.documentElement.style.setProperty('--bs-gray-900', '--bs-white'); 
+        document.documentElement.style.setProperty('--bs-white', '--bs-gray-900'); 
+        } 
     });
 
     // Listen for OS-level theme changes when theme is set to auto

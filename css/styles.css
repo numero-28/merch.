@@ -37,6 +37,10 @@
     src: url(../css/fonts/HelveticaNeueLTStd-Roman.otf);
 }
 
+@include color-mode(dark) {
+}
+
+
 :root {
     --helve-bold: 'helve bold';
     --helve-thin: 'helve thin';
@@ -57,20 +61,26 @@
     opacity: 80%;
     transition: height .6s cubic-bezier(0.19, 1, 0.22, 1), top 0.5s ease;
 }
-#darkmode {
-    position: absolute;
-    z-index: 9999;
-    top: 0;
-    right: 0;
-    width: 10%;
-    height: 30%;
+.darkmode {
+    justify-content: flex-end;
 }
 .nav-item::marker {
     color: transparent;
 }
 .nav-item {
     display: block;
+    padding: 0.375rem 0;
 }
+.nav-item input {
+    border: solid var(--bs-white) 1px;
+}
+.form-switch .form-check-input:focus {
+    box-shadow: none;
+    filter: grayscale(1);
+}
+.form-switch .form-check-input:checked {
+    background-color: var(--bs-gray-900);
+} 
 .btn-group {
     margin-bottom: 0px;
     transition: margin-bottom .5s ease-in-out;
@@ -128,10 +138,6 @@
 .selected {
     font-weight: bold;
     font-family: var(--helve-bold);
-}
-
-#header .col-xl-1 {
-    margin-left: 15%;
 }
 
 #header .col-xl-1 button {
@@ -422,6 +428,7 @@ i img {
     font-size: 2rem;
     filter: invert(1);
 }
+
 
 
 /* RESPONSIVE */
