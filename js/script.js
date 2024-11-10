@@ -287,9 +287,7 @@ $(document).ready(function () {
             const imageDiv = $('<div class="col-xl-3 col-6 crslitems"></div>');
             const imageElement = $('<img>', {
                 src: imageSrc,
-                alt: '',
                 click: function() {
-                    console.log('hola');
                     if (imageSrc === 'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp') {
                         localStorage.setItem('selectedProduct', 'depson');
                         
@@ -464,6 +462,8 @@ $(document).ready(function () {
         });
     });
 
+
+    // manejo del carrusel deslizando para movil
     let isSwiping = false;
     let startTouchX;
     let touchScrollLeft;
@@ -485,6 +485,8 @@ $(document).ready(function () {
     crsl.on('touchend', function () {
         isSwiping = false;
     });
+
+
 
     // Seleccionar todas las imágenes dentro de #gallery-main
     $("#gallery-main img").click(function(){
@@ -604,12 +606,12 @@ $(document).ready(function () {
         }
     });
 
-    // El_Arte_De_Morir_Muy_Despacio_-_LP
-        const selectedProduct = localStorage.getItem('selectedProduct');
-        console.log(selectedProduct);
-        
-        const productos = {
-            depson: [
+
+    // ENLACE ENTRE PAGINAS
+    
+    const productos = {
+        depson: {
+            images: [
                 'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo.webp',
                 'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_6.webp',
                 'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_3.webp',
@@ -617,7 +619,12 @@ $(document).ready(function () {
                 'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_2.webp',
                 'media/product/El_Arte_De_Morir_Muy_Despacio_-_Vinilo_5.webp',
             ],
-            judeline: [
+            title: "Depresión Sonora – El Arte de Morir Muy Despacio (Edición Deluxe)",
+            price: "38,00€"
+        },
+            
+        judeline: {
+            images: [
                 'media/product/Judeline_-_Pareo.webp',
                 'media/product/Judeline_Pareo_6.jpg',
                 'media/product/Judeline_Pareo_4.jpg',
@@ -625,31 +632,44 @@ $(document).ready(function () {
                 'media/product/Judeline_Pareo_3.webp',
                 'media/product/Judeline_Pareo_2.jpeg',
             ],
-            cariño: [
-                'media/product/Cariño_-_Camiseta.webp',
-                'media/product/Cariño_-_Camiseta_3.jpg',
-                'media/product/Cariño_-_Camiseta_2.jpg',
-                'media/product/Cariño_-_Camiseta_5.webp',
-                'media/product/Cariño_-_Camiseta_6.webp',
-                'media/product/Cariño_-_Camiseta_4.webp',
-            ]
-        };
+            title: "Judeline - Pareo",
+            price: "25,00€"
+        },
+        cariño: [
+        ]
+    };
 
-        if (selectedProduct && productos[selectedProduct]) {
-            
-            const images = productos[selectedProduct];
-            const galleryMain = document.getElementById('gallery-main');
-            const productGallery = document.getElementById('product-gallery');
+    const productNames = Object.keys(productos);
+    let currentIndex = productNames.indexOf(localStorage.getItem('selectedProduct') || 'depson'); // Empezamos con el producto seleccionado o 'depson' si no hay nada en localStorage.
 
-            // Configura la imagen principal
-            galleryMain.querySelector('img').src = images[0];
+    function loadProductImages() {
+        const selectedProduct = productNames[currentIndex];
+        const productData = productos[selectedProduct];
+        const images = productData.images;
 
-            // Configura las imágenes de la galería secundaria
-            productGallery.querySelectorAll('img').forEach((img, index) => {
-                img.src = images[index + 1] || ''; // Usa una imagen vacía si no hay más en el array
-            });
+        $('#gallery-main img').attr('src', images[0] || '');
+        $('#product-gallery img').each((index, img) => {
+            $(img).attr('src', images[index + 1] || '');
+        });
 
-        } 
+        $('#product-text .title').text(productData.title);
+        $('#product-text .sub').text(productData.price);
+
+        localStorage.setItem('selectedProduct', selectedProduct);
+
+        }
+
+    $('.arrow.left').on('click', () => {
+        currentIndex = (currentIndex - 1 + productNames.length) % productNames.length;
+        loadProductImages();
+    });
+
+    $('.arrow.right').on('click', () => {
+        currentIndex = (currentIndex + 1) % productNames.length;
+        loadProductImages();
+    });
+
+    loadProductImages();
 
 
     // responsive
