@@ -79,11 +79,11 @@ $(document).ready(function () {
     const artists = {
         depresionsonora: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_LP.webp',
-            'media/Judeline_-_Pareo.webp',
             'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
             'media/El_Arte_De_Morir_Muy_Despacio_-_Sudadera.webp',
             'media/Makinavaja_-_EP.webp',
             'media/Makinavaja_-_Camiseta_Manga_Larga.webp',
+            'media/Depresión_Sonora_USA_Tour_-_Camiseta_.webp',
         ],
         carolinadurante: [
             'media/Elige_Tu_Propia_Aventura_-_LP.webp',
@@ -91,6 +91,42 @@ $(document).ready(function () {
             'media/Cuatro_Chavales_-_LP.webp',
             'media/Carolina_Durante_-_LP.webp',
             'media/Elige_Tu_Propia_Aventura_-_Camiseta.webp',
+        ],
+        judeline: [
+            'media/Judeline_-_Pareo.webp',
+            'media/D.B.C.A._-_Camiseta.webp',
+            'media/Bodhiria_-_LP.jpg',
+            'media/Niña_del_Sur_-_Camiseta.webp',
+            'media/Judeline_-_Sudadera.webp',
+            'media/Fuck_Marry_Kill_-_Sudadera.webp',
+            'media/Fuck_Marry_Kill_-_Camiseta.webp',
+        ],
+        cariño: [
+            'media/Cariño_-_Camiseta.webp',
+            'media/Cariño_-_LP.webp',
+            'media/Cariño_-_Sudadera.webp',
+            'media/Tanto_Por_Hacer_-_Camiseta_Azul.webp',
+            'media/Tanto_Por_Hacer_-_Camiseta_Marrón.webp',
+            'media/Tanto_Por_Hacer_-_LP.webp',
+            'media/Tanto_Por_Hacer_-_Sudadera_Gris.webp',
+        ],
+        laplata: [
+            'media/Acción_Directa_-_LP.webp',
+            'media/Sueños_-_LP.webp',
+        ],
+        camellos: [
+            'media/Camellos_-_Camiseta.jpg',
+            'media/Calle_Para_Siempre_-_LP.jpg',
+            'media/Gran_Hostal_-_LP.jpg',
+            'media/Manual_de_Estilo_-_LP.jpg',
+            'media/Peligrosamente_-_Camiseta.jpg',
+        ],
+        corte: [
+            'media/Corte!_-_EP.webp',
+        ],
+        mujeres: [
+            'media/Aquellos_Ojos_-_Single.webp',
+            'media/No_Volveré_-_Single.webp'
         ]
     };
 
@@ -101,6 +137,10 @@ $(document).ready(function () {
             'media/Cuatro_Chavales_-_LP.webp',
             'media/Elige_Tu_Propia_Aventura_-_LP.webp',
             'media/Carolina_Durante_-_LP.webp',
+            'media/Acción_Directa_-_LP.webp',
+            'media/Cariño_-_LP.webp',
+            'media/Bodhiria_-_LP.jpg',
+            'media/Corte!_-_EP.webp',
         ],
         camis: [
             'media/El_Arte_De_Morir_Muy_Despacio_-_Camiseta.webp',
@@ -603,11 +643,11 @@ $(document).ready(function () {
         judeline: {
             images: [
                 'media/product/Judeline_-_Pareo.webp',
-                'media/product/Judeline_Pareo_2.jpeg',
-                'media/product/Judeline_Pareo_3.webp',
+                'media/product/Judeline_Pareo_6.jpg',
                 'media/product/Judeline_Pareo_4.jpg',
                 'media/product/Judeline_Pareo_5.jpg',
-                'media/product/Judeline_Pareo_6.jpg'
+                'media/product/Judeline_Pareo_3.webp',
+                'media/product/Judeline_Pareo_2.jpeg',
             ],
             title: "Judeline - Pareo",
             price: "25,00€",
@@ -620,8 +660,18 @@ $(document).ready(function () {
             Diseñado por: Marta Ochoa <br><br>
             `
         },
-        cariño: [
-        ]
+        cariño: {
+            images: [
+                'media/product/Cariño_-_Camiseta.webp',
+                'media/product/Cariño_-_Camiseta_3.jpg',
+                'media/product/Cariño_-_Camiseta_2.jpg',
+                'media/product/Cariño_-_Camiseta_5.webp',
+                'media/product/Cariño_-_Camiseta_6.webp',
+                'media/product/Cariño_-_Camiseta_4.webp',
+            ],
+            title: "Cariño - Camiseta 'Cariño'",
+            price: "20,00€"
+        }
     };
 
     const productNames = Object.keys(productos);
