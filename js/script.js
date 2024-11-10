@@ -278,26 +278,16 @@ $(document).ready(function () {
             
     }
 
-
+    
 
     // CARRUSEL DE IMÁGENES HOME
-    var selectedProduct = localStorage.getItem('selectedProduct');
     let selectedArtist = null;
-    let selectedCateg = null;
 
-    if (selectedProduct === 'depson') {
-        selectedArtist = 'depresionsonora';
-        selectedCateg = 'vinilos';
-    } else if (selectedProduct === 'judeline') {
-        selectedArtist = 'judeline';
-        selectedCateg = 'otros';
-    } else if (selectedProduct === 'cariño') {
-        selectedArtist = 'cariño';
-        selectedCateg = 'camis';
-    }
 
+    let selectedCateg;
     if ($(window).width() < 576) {
         selectedCateg = 'todo';
+        $('#home-crsl').css('pointer-events', 'all')
     } else {
         selectedCateg = null;
     }
@@ -387,6 +377,9 @@ $(document).ready(function () {
                         return;
                     }
                     window.location.href = 'product.html';
+                    if (window.location.pathname.includes('index.html')) {
+                        localStorage.removeItem('selectedProduct');
+                    }
                 }
             });
 
@@ -415,8 +408,10 @@ $(document).ready(function () {
             $('#home-crsl .crslitems img').each(function() {
                 const imageUrl = $(this).attr('src');  
                 const imageName = imageUrl.split('/').pop()
-                    .replace(/_/g, ' ') 
-                    .replace(/\.webp$/, '');  
+                    .replace(/_/g, ' ')
+                    .replace(/\.webp$/, '')
+                    .replace(/\.jpg$/, '')  
+                    .replace(/\.jpeg$/, '')  
                 const menuItem = $('<li class="itemName"><a class="dropdown-item" href="#">' + imageName + '</a></li>');
                 itemsMenu.append(menuItem);
                 menuItem.attr('data-image', imageUrl);  
@@ -563,14 +558,12 @@ $(document).ready(function () {
     let touchScrollLeft;
 
     crsl.on('touchstart', function (e) {
-        console.log('smuve');
         isSwiping = true;
         startTouchX = e.originalEvent.touches[0].pageX - crsl.offset().left;
         touchScrollLeft = crsl.scrollLeft();
     });
 
     crsl.on('touchmove', function (e) {
-        
         if (!isSwiping) return;
         e.preventDefault();
         const x = e.originalEvent.touches[0].pageX - crsl.offset().left;
@@ -602,7 +595,6 @@ $(document).ready(function () {
     if (currentPage === 'product.html') {
         $('.my-header-btn').click(function() {
             var headerHeight = $('#header').height();
-            console.log('hhe is' + headerHeight);
             
             if(headerHeight < '50') {
                 $('#header').css('height', '52%');
@@ -625,11 +617,6 @@ $(document).ready(function () {
             }
         });
 
-        $('.dropdown-menu a[data-artist="' + selectedArtist + '"]').addClass('selected').attr('aria-selected', 'true');
-        $('.dropdown-menu a[data-categ="' + selectedCateg + '"]').addClass('selected').attr('aria-selected', 'true');
-
-        
-        updateCarousel();
     }
 
 
@@ -842,8 +829,29 @@ $(document).ready(function () {
         $('#product-info .masinfo').html(productData.masinfo);
 
         localStorage.setItem('selectedProduct', selectedProduct);
+        updateMenuSelection(selectedProduct);
 
+    }
+
+    function updateMenuSelection(selectedProduct) {
+        let selectedArtist = null;
+        let selectedCateg = null;
+
+        if (selectedProduct === 'depson') {
+            selectedArtist = 'depresionsonora';
+            selectedCateg = 'vinilos';
+        } else if (selectedProduct === 'judeline') {
+            selectedArtist = 'judeline';
+            selectedCateg = 'otros';
+        } else if (selectedProduct === 'cariño') {
+            selectedArtist = 'cariño';
+            selectedCateg = 'camis';
         }
+
+        $('.dropdown-menu a').removeClass('selected').attr('aria-selected', 'false');
+        $('.dropdown-menu a[data-artist="' + selectedArtist + '"]').addClass('selected').attr('aria-selected', 'true');
+        $('.dropdown-menu a[data-categ="' + selectedCateg + '"]').addClass('selected').attr('aria-selected', 'true');
+    }
 
     $('.arrow.left').on('click', () => {
         currentIndex = (currentIndex - 1 + productNames.length) % productNames.length;
