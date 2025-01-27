@@ -244,7 +244,7 @@ $(document).ready(function () {
 
     // imagenes random que siguen el movimiento del raton
     var currentPage = window.location.pathname.split('/').pop();
-    if (currentPage === 'index.html' && $(window).width() > 576){
+    if (currentPage === 'index.html' || currentPage === '' && $(window).width() > 576){
         $('#header').css({
             'opacity': '0',
             'pointer-events': 'none'
@@ -577,7 +577,7 @@ $(document).ready(function () {
 
     // MENU
     // para que se abra por encima de las cosas con una altura
-    if ($(window).width() > 576 && currentPage === 'index.html') {
+    if ($(window).width() > 576 && currentPage === 'index.html' || currentPage === '') {
         $('.my-header-btn').click(function() {
             $('#header').css('height', '52%')
             headerHeight();
