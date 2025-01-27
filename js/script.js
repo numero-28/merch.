@@ -18,61 +18,61 @@ $(document).ready(function () {
 
     // las movidas de bootstrap para el dark mode pero modificado
     // para que sea con un switch y para que cambie bien los colores
-    (() => {
-        'use strict'
+    // (() => {
+    //     'use strict'
 
-        const getStoredTheme = () => localStorage.getItem('theme');
+    //     const getStoredTheme = () => localStorage.getItem('theme');
 
-        const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme();
-        if (storedTheme) {
-            return storedTheme;
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        };
+    //     const getPreferredTheme = () => {
+    //     const storedTheme = getStoredTheme();
+    //     if (storedTheme) {
+    //         return storedTheme;
+    //     }
+    //     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    //     };
 
-    const setTheme = theme => {
-      if (theme === 'auto') {
-        document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      } else {
-        document.documentElement.setAttribute('data-bs-theme', theme);
-      }
-    };
+    // const setTheme = theme => {
+    //   if (theme === 'auto') {
+    //     document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    //   } else {
+    //     document.documentElement.setAttribute('data-bs-theme', theme);
+    //   }
+    // };
 
-        const applySwitchState = theme => {
-        document.getElementById('themeSwitch').checked = theme === 'dark';
-        };
+    //     const applySwitchState = theme => {
+    //     document.getElementById('themeSwitch').checked = theme === 'dark';
+    //     };
 
-        setTheme(getPreferredTheme());
-        applySwitchState(getPreferredTheme());
+    //     setTheme(getPreferredTheme());
+    //     applySwitchState(getPreferredTheme());
 
-        document.getElementById('themeSwitch').addEventListener('change', function() {
-            const theme = this.checked ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-bs-theme', theme);
+    //     document.getElementById('themeSwitch').addEventListener('change', function() {
+    //         const theme = this.checked ? 'dark' : 'light';
+    //         document.documentElement.setAttribute('data-bs-theme', theme);
         
-            if (theme === 'dark') {
-                document.documentElement.style.setProperty('--bs-gray-900', '#fff'); 
-                document.documentElement.style.setProperty('--bs-white', '#212529'); 
-                document.documentElement.style.setProperty('--bs-gray-400', '#0f0f0f'); 
-            } else {
-                document.documentElement.style.setProperty('--bs-gray-900', '#212529'); 
-                document.documentElement.style.setProperty('--bs-white', '#fff'); 
-                document.documentElement.style.setProperty('--bs-gray-400', '#ced4da'); 
-            }
-        });
+    //         if (theme === 'dark') {
+    //             document.documentElement.style.setProperty('--bs-gray-900', '#fff'); 
+    //             document.documentElement.style.setProperty('--bs-white', '#212529'); 
+    //             document.documentElement.style.setProperty('--bs-gray-400', '#0f0f0f'); 
+    //         } else {
+    //             document.documentElement.style.setProperty('--bs-gray-900', '#212529'); 
+    //             document.documentElement.style.setProperty('--bs-white', '#fff'); 
+    //             document.documentElement.style.setProperty('--bs-gray-400', '#ced4da'); 
+    //         }
+    //     });
 
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        const storedTheme = getStoredTheme();
-        if (storedTheme !== 'light' && storedTheme !== 'dark') {
-            setTheme(getPreferredTheme());
-            applySwitchState(getPreferredTheme());
-        }
-        });
+    //     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    //     const storedTheme = getStoredTheme();
+    //     if (storedTheme !== 'light' && storedTheme !== 'dark') {
+    //         setTheme(getPreferredTheme());
+    //         applySwitchState(getPreferredTheme());
+    //     }
+    //     });
 
-        window.addEventListener('DOMContentLoaded', () => {
-        applySwitchState(getPreferredTheme());
-        });
-    })();
+    //     window.addEventListener('DOMContentLoaded', () => {
+    //     applySwitchState(getPreferredTheme());
+    //     });
+    // })();
     
 
     // ARRAYS ARTISTAS Y CATEGORIAS

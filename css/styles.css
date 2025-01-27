@@ -127,9 +127,9 @@
     text-align: end;
 }
 
-.darkmode {
+/* .darkmode {
     justify-content: flex-end;
-}
+} */
 
 #dmMvl {
     display: none;
